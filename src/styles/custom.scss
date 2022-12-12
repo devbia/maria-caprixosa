@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+$primary: blue;
+$secondary: green;
+
+
+$theme-colors: (
+  primary: $primary,
+  secondary: $secondary,
+);
+
+@import "bootstrap";
+
+.title-subrayada {
+  font-family: 'Lobster', cursive;
+  font-size: 3.5rem;
+  line-height: 50px;
+}
