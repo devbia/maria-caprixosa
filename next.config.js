@@ -2,7 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   env: {
-    BASE_URL: "http://localhost:3000/api"
+    LOCAL: "PROD",
+    BASE_URL: "http://localhost:3000/api",
+    BASE_URL_PROD: "https://maria-caprixosa.vercel.app/api"
   }
 }
 

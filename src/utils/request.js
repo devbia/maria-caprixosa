@@ -2,7 +2,7 @@
 import axios from "axios"
 
 const request = axios.create({
-  baseURL: process.env.BASE_URL
+  baseURL: process.env.LOCAL == "PROD" ? process.env.BASE_URL_PROD : process.env.BASE_URL
 });
 
 
