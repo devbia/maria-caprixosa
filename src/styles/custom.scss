@@ -1,12 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 
-$primary: blue;
-$secondary: green;
-
+$primary: #734370;
+$secondary: #BE72D8;
+$light: #E4DFE0;
 
 $theme-colors: (
   primary: $primary,
   secondary: $secondary,
+  light: $light,
 );
 
 @import "bootstrap";
@@ -16,3 +17,35 @@ $theme-colors: (
   font-size: 3.5rem;
   line-height: 50px;
 }
+
+.pink-gradient {
+  background: rgb(222, 174, 187);
+  background: linear-gradient(186deg, rgba(222, 174, 187, 1) 35%, rgba(240, 236, 241, 1) 100%);
+}
+
+/* Landing Page - Styles */
+
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+  .bg-maria-caprixosa-house {
+    background: url('/images/landing-page/maria-caprixosa-house.png') no-repeat scroll 85px;
+    float: right;
+    background-size: 30%;
+    background-position: right 30px center;
+  }
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+  .bg-maria-caprixosa-house {
+    background-size: 37%;
+    background-position: right 150px center;
+  }
+}
+
+// X-Large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {}
+
+// XX-Large devices (larger desktops, 1400px and up)
+@media (min-width: 1400px) {}
