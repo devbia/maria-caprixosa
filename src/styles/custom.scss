@@ -27,18 +27,13 @@ $theme-colors: (
 
 
 // Medium devices (tablets, 768px and up)
-@media (min-width: 768px) {
-  .bg-maria-caprixosa-house {
-    background: url('/images/landing-page/maria-caprixosa-house.png') no-repeat scroll 85px;
-    float: right;
-    background-size: 30%;
-    background-position: right 30px center;
-  }
-}
+@media (min-width: 768px) {}
 
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) {
   .bg-maria-caprixosa-house {
+    background: url('/images/landing-page/maria-caprixosa-house.png') no-repeat scroll 85px;
+    float: right;
     background-size: 37%;
     background-position: right 150px center;
   }
