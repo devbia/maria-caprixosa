@@ -47,7 +47,7 @@ export default function Navbar() {
         </div>
         <div className="col-1 col d-lg-none">
           <div className="d-flex h-100 h-full align-items-center justify-content-center gap-md-3">
-            <button class="navbar-toggler"
+            <button className="navbar-toggler"
               type="button"
               onClick={() => setOpenMenu(!isOpenMenu)}
               aria-expanded={isOpenMenu}>
