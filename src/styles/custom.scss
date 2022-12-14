@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 
 $primary: #734370;
-$secondary: #BE72D8;
+$secondary: #be72d8;
 $light: #E4DFE0;
+$brown: #59221D;
 
 $theme-colors: (
   primary: $primary,
@@ -21,6 +22,41 @@ $theme-colors: (
 .pink-gradient {
   background: rgb(222, 174, 187);
   background: linear-gradient(186deg, rgba(222, 174, 187, 1) 35%, rgba(240, 236, 241, 1) 100%);
+}
+
+.menu-item-selected {
+  position: relative;
+  line-height: 2;
+}
+
+.menu-item-selected:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  border-bottom: solid 3px $brown;
+  border-top-left-radius: 10%;
+  animation: borderLeftRight 0.1s linear forwards;
+}
+
+.menu-mobile-close {
+  height: 0 !important;
+}
+
+.menu-mobile-close>* {
+  display: none;
+}
+
+
+@keyframes borderLeftRight {
+  0% {
+    width: 0%;
+  }
+
+  100% {
+    width: 100%;
+  }
 }
 
 /* Landing Page - Styles */
