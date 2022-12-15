@@ -1,10 +1,8 @@
 
 import { useEffect, useState } from "react"
 import request from '../utils/request';
-import Image from "next/image";
-import { Title, SubTitle } from "../components/Typography/Title";
 
-import { TextMuted, TextBold, TextNormal } from "../components/Typography/Paragraph";
+
 
 export default function HomePage() {
 
