@@ -1,85 +1,78 @@
+import Section1 from "../components/Home/Section1";
 import Layout from "../components/Layout";
-import { PrimaryButton } from "../components/Button";
-import { TextBold, TextNormal, TextBig } from "../components/Typography/Paragraph";
-import { SmallTitle } from "../components/Typography/Title";
+
+import { IoIosArrowBack } from 'react-icons/io';
+import Section2 from "../components/Home/Section2";
+import { CheckBox } from "../components/Form";
+
 export default function HomePage() {
 
   return (
     <Layout>
-      <section className="pt-md-5 w-100 bg-light bg-home-banner mb-5">
-        <div className="container ">
-          <div className="row">
-            <div className="col-md-6">
-              <div className="d-md-flex h-100 justify-center justify-content-md-end">
-                <img src={'/images/home/girl-house-mobile.png'} fill className="girl-house d-md-none" />
-                <img src={'/images/home/girl-house.png'} fill className="girl-house d-none d-md-block" />
-              </div>
+      {/* Section one */}
+      <Section1 />
+      <Section2 />
+      <div className="w-full px-2 md:pl-24 pb-8 bg-accent">
+        <div className="flex flex-col md:flex-row ml-0 md:ml-14 gap-14">
+          <div className="flex md:flex-col gap-6 justify-center md:justify-start">
+            <img src="/images/global/avatar-logo.png" className="w-[100px] md:w-auto" style={{ maxWidth: '155px' }} />
+            <p className="font-lg font-bold text-center md:text-left">Um lar limpo e <br className="hidden md:block" />
+              aconchegante com  <br className="hidden md:block" />
+              toque de Maria caprixosa</p>
+          </div>
+          <div className="flex flex-1 gap-6">
+            <div className=" hidden md:flex  flex-col h-full justify-center">
+              <button className="btn btn-ghost btn-circle">
+                <IoIosArrowBack size={35} />
+              </button>
             </div>
-            <div className="col-md-6">
-              <div className="d-flex h-100 flex-column justify-content-center gap-4">
-                <div className="d-flex flex-column justify-content-center gap-3">
-                  <div className="col col-md-6">
-                    <div className="d-flex justify-content-center">
-                      <img src="/images/icons/profile.svg" style={{ maxWidth: '40px' }} />
-                    </div>
-                  </div>
-                  <span className="text-uppercase letter-spacing-5 h6">Caprixo é o nome dela!</span>
-                </div>
-                <div className="d-flex flex-column  gap-3">
-                  <TextBold text="Agora com mais comodidade e agendamentos!" className="mb-2" />
-                  <div className="d-flex flex-column">
-                    <TextNormal text={"Você faz sua agenda e flexiona seus horários, com apenas um clique em saiba como, padronizamos sua agenda e horários, oferecemos confiabilidade e flexibilidade."} />
-                    <TextNormal text={"Inscreva-se em nossa plataforma."} />
-                  </div>
-                </div>
-
-                <div className="d-flex pe-md-5 justify-content-end">
-                  <div className="div">
-                    <PrimaryButton lg>
-                      SAIBA COMO
-                    </PrimaryButton>
-                  </div>
-                </div>
-              </div>
+            <div className="flex flex-1 w-full overflow-x-auto gap-8">
+              <img className="rounded-lg" src="/images/home/carousel/1.png" />
+              <img className="rounded-lg" src="/images/home/carousel/2.png" />
+              <img className="rounded-lg" src="/images/home/carousel/3.png" />
             </div>
           </div>
         </div>
-      </section>
-      <section className="pink-gradient">
-        <div className="container py-5">
-          <div className="row">
-            <div className="col-12">
-              <div className="d-flex justify-content-center mb-md-5">
-                <SmallTitle text={'a procura de uma CAPRIXOSA?'} />
-              </div>
-            </div>
-            <div className="col-12">
-              <div className="d-flex gap-5 justify-content-center">
-                <div className="form-check">
-                  <input className="form-check-input" type="checkbox" />
-                  <label className="form-check-label" for="flexCheckDefault">
-                    <TextBig text={"Diarista"} />
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input className="form-check-input" type="checkbox" />
-                  <label className="form-check-label" for="flexCheckDefault">
-                    <TextBig text={"Doméstica"} />
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input className="form-check-input" type="checkbox" />
-                  <label className="form-check-label" for="flexCheckDefault">
-                    <TextBig text={"Diarista"} />
-                  </label>
-                </div>
+      </div>
 
-              </div>
+      <div className="w-full px-2 md:pl-24 bg-accent">
+        <div className="w-full h-full bg-bottom bg-right bg-no-repeat py-14 relative">
+          <img src="/images/home/right-bottom.png" className="hidden lg:block absolute right-0 bottom-0" />
+          <div className="flex flex-col bg-[#B9A1B7] w-full p-5 justify-start max-w-sm rounded-lg ">
+            <div className="flex flex-col mb-6">
+              <span className="uppercase font-extrabold mb-2">CONTATE-nos</span>
+              <p>Queremos falar mais com você, informe seus dados!</p>
             </div>
-            .
+
+            <div class="form-control w-full max-w-xs mb-2">
+              <label class="label">
+                <span class="label-text font-bold">Seu nome</span>
+              </label>
+              <input type="text" placeholder="Digite seu nome aqui..." class="input input-bordered w-full max-w-xs" />
+            </div>
+            <p>Apenas informe, por onde nós podemos entrar em contato?</p>
+            <div class="form-control w-full max-w-xs mb-2">
+              <label class="label">
+                <span class="label-text font-bold">Telefone</span>
+              </label>
+              <input type="text" placeholder="EX: (xx) xxxx-xxxxx" class="input input-bordered w-full max-w-xs" />
+            </div>
+            <div class="form-control w-full max-w-xs mb-4">
+              <label class="label">
+                <span class="label-text font-bold">E-mail</span>
+              </label>
+              <input type="email" placeholder="Ex: seuemail@email.com" class="input input-bordered w-full max-w-xs" />
+            </div>
+            <div className="mb-4">
+              <CheckBox label={"Concordo em receber comunicações"} checkboxClass="checkbox-info" />
+            </div>
+
+            <button className="btn btn-info font-bold">
+              Enviar
+            </button>
           </div>
         </div>
-      </section>
-    </Layout>
+      </div>
+    </Layout >
   );
 }

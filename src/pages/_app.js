@@ -1,9 +1,8 @@
 
 import { Heebo } from '@next/font/google'
 
-import 'bootstrap/dist/css/bootstrap.css';
 import Head from 'next/head';
-import '../styles/custom.scss';
+import '../styles/globals.css';
 
 const heebo = Heebo({
   weight: ['400', '600', '700', '900'],
