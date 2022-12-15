@@ -3,7 +3,7 @@
 Desenvolvimento do front-end das telas representadas no figma. 
 Todas as telas a serem desenvolvidas estão dentro da pasta screens. 
 
-O projeto está previsto para entrega dia `11/12/2022`.
+O projeto está previsto para entrega dia `20/12/2022`.
 
 ### Problema com alguma tela? 
 
