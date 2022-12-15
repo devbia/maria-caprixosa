@@ -23,8 +23,8 @@ export default function HomePage() {
 
   const UserAttribute = (attrName, value) => (
     <div className="d-flex gap-2 flex-wrap flex-lg-nowrap pe-2">
-      <TextBold text={attrName} />
-      <TextNormal text={value} />
+      {/* <TextBold text={attrName} />
+      <TextNormal text={value} /> */}
     </div>
   );
 
