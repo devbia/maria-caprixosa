@@ -2,7 +2,7 @@
 import Container from "../Container";
 import { FiFilter } from 'react-icons/fi';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
-import { TextTracking } from "../../../public/Typography";
+import { TextTracking } from "../Typography";
 import { CheckBox } from "../Form";
 export default function Section2() {
   return (

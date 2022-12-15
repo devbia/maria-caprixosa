@@ -1,7 +1,7 @@
 
 import Container from "../Container";
 
-import { TextTracking } from "../../../public/Typography";
+import { TextTracking } from "../Typography";
 export default function Section1() {
   return (
     <Container className="bg-accent">
