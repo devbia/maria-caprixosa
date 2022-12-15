@@ -27,7 +27,7 @@ export default function Section2() {
           </a>
 
           {/* Filter desktop */}
-          <div className="mx-14 rounded py-4 bg-white w-full px-4">
+          <div className="mx-14 hidden lg:flex rounded py-4 bg-white w-full px-4">
             <div className="hidden md:grid grid-cols-7">
               <div><FiFilter size={35} /></div>
               {["Normal", "Período", "Moro em", "Comodos", "Localização"].map((i) => <div key={i} className="flex flex-col justify-center">
