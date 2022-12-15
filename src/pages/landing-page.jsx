@@ -34,8 +34,8 @@ export default function HomePage() {
     getUser();
 
   }, []);
-
-  return (
+  return (<></>);
+  /* return (
     <div className='vh-100 w-100 px-3 px-lg-5 pt-5 pt-lg-0  d-flex flex-column justify-content-lg-center align-items-center align-items-lg-start bg-maria-caprixosa-house'>
       <div className="row">
         <div className="col col-lg-9">
@@ -71,5 +71,5 @@ export default function HomePage() {
         </div>
       </div>
     </div>
-  )
+  ) */
 }
