@@ -1,10 +1,10 @@
-export default function Modal({ id, children }) {
+export default function Modal({ id, children, className = "" }) {
 
   return (
-    <div class="modal" id={id}>
-      <div class="modal-box">
+    <div className={`modal ${className}`} id={id} >
+      <div className="modal-box">
         {children}
       </div>
-    </div>
+    </div >
   );
 }

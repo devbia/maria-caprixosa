@@ -53,8 +53,7 @@ export default function teste(params) {
           <FaFacebookSquare size={25} />
         </div>
         <div className="flex text-center self-center">
-          <a class="link link-hover text-lg">Contato</a>
-
+          <a className="link link-hover text-lg">Contato</a>
         </div>
       </div>
     </Container>
