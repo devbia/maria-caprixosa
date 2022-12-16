@@ -23,7 +23,7 @@ export default function Section1({ profile }) {
             <span className="font-bold md:hidden uppercase text-lg">{profile?.name}</span>
             <blockquote>
               <p className="justify-start lg:mb-5">
-                "{profile?.description}
+                {profile?.description}
               </p>
             </blockquote>
             <div className="flex flex-col gap-3 mb-3">
