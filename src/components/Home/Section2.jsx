@@ -1,10 +1,27 @@
 
 import Container from "../Container";
 import { FiFilter } from 'react-icons/fi';
-import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import { TextTracking } from "../Typography";
 import { CheckBox } from "../Form";
+import { Services } from "../Tabs";
 export default function Section2() {
+
+
+  const categories = {
+    faxineira: {
+      title: "Faxineira",
+      services: []
+    },
+    diarista: {
+      title: "Diarista",
+      services: []
+    },
+    domestica: {
+      title: "Doméstica",
+      services: []
+    },
+  };
+
   return (
     <Container className="bg-gradient-to-b from-[#DEAEBB] to-[#F0ECF1] pt-8 pb-4">
       <div className="flex flex-col">
@@ -14,9 +31,9 @@ export default function Section2() {
           </TextTracking>
         </div>
         <div className="flex flex-col md:flex-row justify-center gap-8 mb-10 md:mb-14">
-          <CheckBox label={"faxineira"} checkboxClass="checkbox-primary" labelClass="uppercase font-bold" />
-          <CheckBox label={"diarista"} checkboxClass="checkbox-primary" labelClass="uppercase font-bold" />
-          <CheckBox label={"doméstica"} checkboxClass="checkbox-primary" labelClass="uppercase font-bold" />
+          <CheckBox name="category" label={"faxineira"} checkboxClass="checkbox-primary" labelClass="uppercase font-bold" checked />
+          <CheckBox name="category" label={"diarista"} checkboxClass="checkbox-primary" labelClass="uppercase font-bold" />
+          <CheckBox name="category" label={"doméstica"} checkboxClass="checkbox-primary" labelClass="uppercase font-bold" />
         </div>
 
         <div className="flex w-full">
@@ -28,14 +45,13 @@ export default function Section2() {
 
           {/* Filter desktop */}
           <div className="mx-14 hidden lg:flex rounded py-4 bg-white w-full px-4">
-            <div className="hidden md:grid grid-cols-7">
-              <div><FiFilter size={35} /></div>
-              {["Normal", "Período", "Moro em", "Comodos", "Localização"].map((i) => <div key={i} className="flex flex-col justify-center">
-                <a className="cursor-pointer flex gap-2 align-bottom">{i} <IoIosArrowDown className="self-center" /></a>
-              </div>)}
-
-              <div>
-                <button className="btn btn-primary">buscar</button>
+            <div className="flex">
+              <div className="flex flex-col justify-center"><FiFilter size={30} /></div>
+              <div className="flex flex-1 justify-between">
+                <Services />
+              </div>
+              <div className="flex flex-col justify-center">
+                <button className="btn btn-primary w-40 btn-sm">buscar</button>
               </div>
             </div>
           </div>

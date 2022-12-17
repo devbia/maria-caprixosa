@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { HiMenuAlt2 } from 'react-icons/hi'
 
 import { useState } from "react";
+import RegisterModal from "../RegisterModal";
 
 export default function Navbar() {
 
@@ -47,8 +48,8 @@ export default function Navbar() {
           </div>
         </div>
         <div className="navbar-end gap-4 hidden lg:flex">
-          <button className="btn btn-primary">Quero contratar</button>
-          <button className="btn btn-secondary">Quero me escrever</button>
+          <a href="#contract" className="btn btn-primary">Quero contratar</a>
+          <a href="#register" className="btn btn-secondary">Quero me escrever</a>
         </div>
       </div>
       <div className={`w-full lg:hidden dropdown-content menu ${isOpenMenu ? 'flex' : 'hidden'} z-10`}>
@@ -58,6 +59,8 @@ export default function Navbar() {
           </div>
         </ul>
       </div>
+
+      <RegisterModal id={"register"} />
     </div>
   );
 }

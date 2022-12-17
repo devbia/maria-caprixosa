@@ -44,24 +44,24 @@ export default function HomePage() {
               <p>Queremos falar mais com você, informe seus dados!</p>
             </div>
 
-            <div class="form-control w-full max-w-xs mb-2">
-              <label class="label">
-                <span class="label-text font-bold">Seu nome</span>
+            <div className="form-control w-full max-w-xs mb-2">
+              <label className="label">
+                <span className="label-text font-bold">Seu nome</span>
               </label>
-              <input type="text" placeholder="Digite seu nome aqui..." class="input input-bordered w-full max-w-xs" />
+              <input type="text" placeholder="Digite seu nome aqui..." className="input input-bordered w-full max-w-xs" />
             </div>
             <p>Apenas informe, por onde nós podemos entrar em contato?</p>
-            <div class="form-control w-full max-w-xs mb-2">
-              <label class="label">
-                <span class="label-text font-bold">Telefone</span>
+            <div className="form-control w-full max-w-xs mb-2">
+              <label className="label">
+                <span className="label-text font-bold">Telefone</span>
               </label>
-              <input type="text" placeholder="EX: (xx) xxxx-xxxxx" class="input input-bordered w-full max-w-xs" />
+              <input type="text" placeholder="EX: (xx) xxxx-xxxxx" className="input input-bordered w-full max-w-xs" />
             </div>
-            <div class="form-control w-full max-w-xs mb-4">
-              <label class="label">
-                <span class="label-text font-bold">E-mail</span>
+            <div className="form-control w-full max-w-xs mb-4">
+              <label className="label">
+                <span className="label-text font-bold">E-mail</span>
               </label>
-              <input type="email" placeholder="Ex: seuemail@email.com" class="input input-bordered w-full max-w-xs" />
+              <input type="email" placeholder="Ex: seuemail@email.com" className="input input-bordered w-full max-w-xs" />
             </div>
             <div className="mb-4">
               <CheckBox label={"Concordo em receber comunicações"} checkboxClass="checkbox-info" />

@@ -49,7 +49,7 @@ export default function Section1({ profile }) {
       </div>
       <Modal id={"contratar"}>
         <div className="modal-action">
-          <a href="#" className="btn">Yay!</a>
+          <a href="#" className="btn">Fechar</a>
         </div>
       </Modal>
     </div>
