@@ -1,11 +1,11 @@
 
 import Container from "../Container";
-
+import { motion } from "framer-motion";
 import { TextTracking } from "../Typography";
 export default function Section1() {
   return (
-    <Container className="bg-accent">
-      <div className="w-full">
+ <Container className="bg-accent">
+      <motion.div animate={{opacity: 1 }}  initial={{ opacity: 0 }} transition={{ease: "easeOut", duration: 2}} className="w-full">
         <div className="grid grid-cols-1 md:grid-cols-2 md:bg-[url('/images/home/bg.png')] bg-no-repeat bg-contain bg-center">
           <div className="flex justify-center md:justify-end">
             <img className="hidden md:block max-w-md" src="/images/home/girl-house.png" alt="banner home page" />
@@ -31,14 +31,14 @@ export default function Section1() {
                 </div>
               </div>
               <div className="flex w-full md:justify-center lg:justify-end pt-4 md:pt-8 lg:pt-3">
-                <button className="btn btn-primary w-full md:w-auto">
+                <a href="#contact_form" className="btn btn-primary w-full md:w-auto">
                   Saiba como
-                </button>
+                </a>
               </div>
             </div>
           </div>
         </div>
-      </div>
+         </motion.div>
     </Container >
   );
 }

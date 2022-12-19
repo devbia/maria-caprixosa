@@ -42,7 +42,7 @@ export const Select = (props) => {
       <label className="label pb-0">
         <span className="label-text font-bold pb-0">{label}</span>
       </label>
-      <select className="select select-bordered" {...props}>
+      <select className="select select-bordered" {...props} defaultValue={'1'}>
         <option disabled selected>Selecione</option>
         {
           items.map((item, i) => <option key={i} value={item.value}>{item.text}</option>)

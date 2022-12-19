@@ -3,38 +3,37 @@ import Container from "../Container";
 import { FiFilter } from 'react-icons/fi';
 import { TextTracking } from "../Typography";
 import { CheckBox } from "../Form";
-import { Services } from "../Tabs";
+import { Services, Periodo, LocationCity, Comodos, Location } from "../Tabs";
+
+import { motion } from "framer-motion";
+import { useContext } from "react";
+import { FilterFormContext } from "../../hooks/FilterFormContext";
+
 export default function Section2() {
 
+  const {choosedOption, setChoosedOption } = useContext(FilterFormContext)
 
-  const categories = {
-    faxineira: {
-      title: "Faxineira",
-      services: []
-    },
-    diarista: {
-      title: "Diarista",
-      services: []
-    },
-    domestica: {
-      title: "Doméstica",
-      services: []
-    },
-  };
-
+  const toggleCheckBox = (option) => {
+    setChoosedOption(choosedOption == option ? null : option);
+  }
+ 
   return (
     <Container className="bg-gradient-to-b from-[#DEAEBB] to-[#F0ECF1] pt-8 pb-4">
       <div className="flex flex-col">
-        <div className="flex justify-center my-10 md:my-14">
-          <TextTracking>
-            A procura de uma caprixosa?
-          </TextTracking>
-        </div>
-        <div className="flex flex-col md:flex-row justify-center gap-8 mb-10 md:mb-14">
-          <CheckBox name="category" label={"faxineira"} checkboxClass="checkbox-primary" labelClass="uppercase font-bold" checked />
-          <CheckBox name="category" label={"diarista"} checkboxClass="checkbox-primary" labelClass="uppercase font-bold" />
-          <CheckBox name="category" label={"doméstica"} checkboxClass="checkbox-primary" labelClass="uppercase font-bold" />
-        </div>
+        <motion.div  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true }}>
+          <div className="flex justify-center my-10 md:my-14">
+            <TextTracking>
+              A procura de uma caprixosa?
+            </TextTracking>
+          </div>
+          <div className="flex flex-col md:flex-row justify-center gap-8 mb-10 md:mb-14">
+            <CheckBox name="category" checked={choosedOption == "faxineira"} onClick={_=>toggleCheckBox("faxineira")} label={"faxineira"} checkboxClass="checkbox-primary" labelClass="uppercase font-bold"/>
+            <CheckBox name="category" checked={choosedOption == "diarista"} onClick={_=>toggleCheckBox("diarista")}  label={"diarista"} checkboxClass="checkbox-primary" labelClass="uppercase font-bold"/>
+            <CheckBox name="category" checked={choosedOption == "domestica"} onClick={_=>toggleCheckBox("domestica")}  label={"doméstica"} checkboxClass="checkbox-primary" labelClass="uppercase font-bold"/>
+          </div>
+        </motion.div>
 
         <div className="flex w-full">
           {/* Dialog button */}
@@ -44,11 +43,15 @@ export default function Section2() {
           </a>
 
           {/* Filter desktop */}
-          <div className="mx-14 hidden lg:flex rounded py-4 bg-white w-full px-4">
-            <div className="flex">
+          <div className="mx-14 hidden lg:flex rounded py-4 bg-[#f0ecf1]  w-full px-4">
+            <div className="flex relative w-full">
               <div className="flex flex-col justify-center"><FiFilter size={30} /></div>
-              <div className="flex flex-1 justify-between">
+              <div className="flex flex-1  w-full justify-between px-24">
                 <Services />
+                <Periodo/>
+                <LocationCity/> 
+                <Comodos/> 
+                <Location/>
               </div>
               <div className="flex flex-col justify-center">
                 <button className="btn btn-primary w-40 btn-sm">buscar</button>
@@ -72,7 +75,7 @@ export default function Section2() {
             </div>
           </div>
           <div className="hidden md:flex justify-end">
-            <img src="/images/home/aspirador.png" className="max-w-sm rounded-lg" alt="Por que maria caprixosa?" />
+            <img src="/images/home/aspirador.png" className="max-w-[230px] lg:max-w-sm rounded-lg" alt="Por que maria caprixosa?" />
           </div>
         </div>
       </div>

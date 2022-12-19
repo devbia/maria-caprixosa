@@ -9,7 +9,7 @@ export default class CustomDocument extends Document {
 
   render() {
     return (
-      <Html lang='pt-br'>
+      <Html lang='pt-br' className='scroll-smooth'>
         <Head />
         <body>
           <Main />

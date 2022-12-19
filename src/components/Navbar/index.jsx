@@ -3,13 +3,19 @@ import NavbarItem from "./NavbarItem";
 import { useRouter } from "next/router";
 import { HiMenuAlt2 } from 'react-icons/hi'
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import RegisterModal from "../RegisterModal";
+import { motion } from "framer-motion";
+
+const variants = {
+  open: { opacity: 1,  height: 120 },
+  closed: { opacity: 0,  height: 0 },
+}
 
 export default function Navbar() {
 
   const router = useRouter();
-
+  const ckRef = useRef(null); 
   const [isOpenMenu, setOpenMenu] = useState(false);
 
   const pages = [
@@ -27,38 +33,49 @@ export default function Navbar() {
     },
   ];
 
+  function changeMenu(){
+    setOpenMenu(!isOpenMenu);
+  }
+
   return (
-    <div className="w-full flex flex-col relative">
+    <div className="w-full flex flex-col relative ">
       <div className="navbar bg-base-100 md:px-24 py-4 justify-between flex">
         <div className="navbar-start hidden lg:flex">
           <div className="flex justify-center gap-5">
             {pages.map(({ text, path }) => <NavbarItem key={text} text={text} path={path} selected={router.pathname == path} />)}
           </div>
         </div>
-        <div className="navbar-center  md:w-auto ">
+        <div className="flex md:w-auto w-full  ">
           <div className="flex justify-center w-full">
             <img src="/images/global/navbar-logo.png" alt="Maria Caprixosa - logo" />
           </div>
         </div>
         <div className="navbar-end w-auto lg:hidden">
           <div className="dropdown">
-            <label onClick={() => setOpenMenu(!isOpenMenu)} className="btn btn-ghost btn-circle">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
+         
+            <label onClick={() => changeMenu()} className="btn btn-circle btn-ghost swap swap-rotate">
+              <input ref={ckRef} type="checkbox" />
+              <svg className="swap-off fill-current" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512"><path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z"/></svg>
+              <svg className="swap-on fill-current" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512"><polygon points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49"/></svg>
             </label>
           </div>
         </div>
         <div className="navbar-end gap-4 hidden lg:flex">
-          <a href="#contract" className="btn btn-primary">Quero contratar</a>
+          <a href="/profiles" className="btn btn-primary">Quero contratar</a>
           <a href="#register" className="btn btn-secondary">Quero me escrever</a>
         </div>
       </div>
-      <div className={`w-full lg:hidden dropdown-content menu ${isOpenMenu ? 'flex' : 'hidden'} z-10`}>
+      <motion.nav   animate={ckRef?.current?.checked ? "open" : "closed"}
+      initial={{ opacity: 0 }}
+        variants={variants}
+        transition={{ease: "easeOut", duration: .5}}
+        className={`w-full lg:hidden dropdown-content menu flex z-10`}>
         <ul tabIndex={0} className=" bg-[#F0ECF1] w-full px-2 py-2 rounded divide-x-2 divide-solid divide-black">
           <div className="flex flex-col justify-center gap-5">
             {pages.map(({ text, path }) => <NavbarItem key={text} text={text} path={path} mobile={true} selected={router.pathname == path} />)}
           </div>
         </ul>
-      </div>
+      </motion.nav>
 
       <RegisterModal id={"register"} />
     </div>
