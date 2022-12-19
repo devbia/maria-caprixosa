@@ -6,7 +6,7 @@ import { HiMenuAlt2 } from 'react-icons/hi'
 import { useRef, useState } from "react";
 import RegisterModal from "../RegisterModal";
 import { motion } from "framer-motion";
-
+import Link from "next/link";
 const variants = {
   open: { opacity: 1,  height: 120 },
   closed: { opacity: 0,  height: 0 },
@@ -61,7 +61,7 @@ export default function Navbar() {
           </div>
         </div>
         <div className="navbar-end gap-4 hidden lg:flex">
-          <a href="/profiles" className="btn btn-primary">Quero contratar</a>
+          <Link href="/profiles" className="btn btn-primary">Quero contratar</Link>
           <a href="#register" className="btn btn-secondary">Quero me escrever</a>
         </div>
       </div>
