@@ -4,6 +4,8 @@ import { Heebo } from '@next/font/google'
 import Head from 'next/head';
 import FilterContextProvider from '../hooks/FilterContext'; 
 import FilterFormProvider from '../hooks/FilterFormContext'; 
+import FilterMobileProvider from '../hooks/FilterMobileContext'; 
+
 import '../styles/globals.css';
 
 const heebo = Heebo({
@@ -15,16 +17,18 @@ const heebo = Heebo({
 function MariaCaprixosa({ Component, pageProps }) {
   return (
     <>
-     <FilterFormProvider>
-      <FilterContextProvider>
-        <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0" />
-      </Head>
-      <main className={heebo.className}>
-        <Component {...pageProps} />
-      </main>
-      </FilterContextProvider>
-    </FilterFormProvider>
+    <FilterMobileProvider>
+      <FilterFormProvider>
+        <FilterContextProvider>
+          <Head>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0" />
+        </Head>
+        <main className={heebo.className}>
+          <Component {...pageProps} />
+        </main>
+        </FilterContextProvider>
+      </FilterFormProvider>
+    </FilterMobileProvider>
     </>
   )
 }

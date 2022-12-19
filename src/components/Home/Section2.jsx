@@ -8,10 +8,12 @@ import { Services, Periodo, LocationCity, Comodos, Location } from "../Tabs";
 import { motion } from "framer-motion";
 import { useContext } from "react";
 import { FilterFormContext } from "../../hooks/FilterFormContext";
+import { FilterMobileContext } from "../../hooks/FilterMobileContext";
 
 export default function Section2() {
 
   const {choosedOption, setChoosedOption } = useContext(FilterFormContext)
+  const {filterMobileOpen, setFilterMobileOpen} = useContext(FilterMobileContext);
 
   const toggleCheckBox = (option) => {
     setChoosedOption(choosedOption == option ? null : option);
@@ -37,10 +39,10 @@ export default function Section2() {
 
         <div className="flex w-full">
           {/* Dialog button */}
-          <a href="#filters" className="btn btn-info w-full md:hidden gap-5">
+          <button onClick={() => setFilterMobileOpen(true)} className="btn btn-info w-full lg:hidden gap-5">
             <FiFilter size={35} />
             Filtre sua busca
-          </a>
+          </button>
 
           {/* Filter desktop */}
           <div className="mx-14 hidden lg:flex rounded py-4 bg-[#f0ecf1]  w-full px-4">

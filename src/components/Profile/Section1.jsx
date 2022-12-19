@@ -150,7 +150,7 @@ export default function Section1({ profile }) {
 
             <div className="flex w-full gap-8">
               <Input label="Nome:" placeholder="Informe seu Nome e sobrenome"/>
-              <Input label="Telefone:" placeholder="Informe seu telefone para contato"/>
+              <Input mask="(99) 9999-99999" label="Telefone:" placeholder="Informe seu telefone para contato"/>
             </div>
           </div>
           <div className="flex justify-center pt-8">

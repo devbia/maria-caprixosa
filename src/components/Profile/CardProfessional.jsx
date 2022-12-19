@@ -27,7 +27,7 @@ export default function CardProfessional({children, image, name, job = "", start
     return stars;
   }
   return (
-    <div className="flex w-full justify-center">
+    <div className="flex w-full justify-center mx-4">
        <div className="card w-72 bg-transparent">
   <figure><img src={image} alt={"Maria caprixosa - " + name + " trabalha com " + job} /></figure>
   <div className="card-body p-0">

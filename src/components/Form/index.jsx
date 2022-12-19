@@ -1,4 +1,5 @@
 
+import InputMask from "react-input-mask";
 
 export const CheckBox = (props) => {
   const { label, checkboxClass, labelClass } = props;
@@ -16,7 +17,7 @@ export const Input = (props) => (
     <label className="label m-0 pb-0">
       <span className="label-text bold mb-0 font-bold ">{props.label}</span>
     </label>
-    <input {...props} type={props?.type || "text"} placeholder={props?.placeholder} className="input input-bordered w-full max-w-xs" />
+    <InputMask {...props} type={props?.type || "text"} placeholder={props?.placeholder} className="input input-bordered w-full max-w-xs"/>
   </div>
 );
 

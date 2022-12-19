@@ -1,6 +1,6 @@
 
 import { CheckBox } from "../Form";
-
+import InputMask from "react-input-mask";
 import { motion } from "framer-motion";
 
 
@@ -37,7 +37,7 @@ export default function ContactForm({ isMobile = false, isOpen = false, bottomHe
               <label className="label">
                 <span className="label-text font-bold">Telefone</span>
               </label>
-              <input type="text" placeholder="EX: (xx) xxxx-xxxxx" className="input input-bordered w-full md:max-w-xs" />
+              <InputMask mask={"(99) 9999-99999"} type="text" placeholder="EX: (xx) xxxx-xxxxx" className="input input-bordered w-full md:max-w-xs" />
             </div>
             <div className="form-control w-full max-w-xs mb-4">
               <label className="label">

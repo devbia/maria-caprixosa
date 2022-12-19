@@ -2,10 +2,57 @@
 import { motion } from "framer-motion";
 
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'; 
-import { useContext, useState } from "react";
+import { MdArrowBackIos } from 'react-icons/md'; 
+import { useContext, useEffect, useState } from "react";
 import { FilterContext } from "../../hooks/FilterContext";
 import { FilterFormContext } from "../../hooks/FilterFormContext";
+import { FilterMobileContext } from "../../hooks/FilterMobileContext";
+import { TextTracking } from "../Typography";
 
+
+
+
+export const TabTemplateMobile = ({title, id, beforeItem = "", choose = "Diarista", subtitle="",  children}) => {
+
+
+
+  const { itemOpen, setItemOpen, setFilterMobileOpen} = useContext(FilterMobileContext);
+
+
+  function changeView(){
+    if(itemOpen == "services"){
+       setFilterMobileOpen(false);
+       setItemOpen("services");
+    }else {
+      setItemOpen(beforeItem);
+      console.log(beforeItem);
+    }
+  }
+
+  if(itemOpen != id)
+    return null;
+
+  return (
+    <div className="flex flex-col w-full h-full">
+      <div className="flex flex-col gap-3">
+        <div className="flex mb-2 pt-2 text-lg font-bold" onClick= {_=> changeView()}>
+          <div className="flex h-full flex-col justify-center" ><MdArrowBackIos size={15}/></div>{title}
+        </div>
+        <div className="flex w-full justify-center md:mb-8">
+          <TextTracking>
+           Você escolheu {choose}
+          </TextTracking>
+        </div>
+        <div className="flex font-bold">
+          {subtitle}
+        </div>
+      </div>
+      <div className="flex">
+        {children}
+      </div>
+    </div>
+  );
+}
 
 export default function TabTemplate({title, subtitle, id, children, showChoosedOption = false})
 {

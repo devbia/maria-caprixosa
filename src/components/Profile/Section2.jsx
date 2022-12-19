@@ -41,7 +41,7 @@ export default function Section2() {
             <TextTracking>Veja outros perfis</TextTracking>
           </div>
          
-          <div className="flex w-full justify-center md:justify-end">
+          <div className="flex w-full justify-center py-5 lg:py-0 lg:justify-end">
             <div className="form-control">
               <div className="input-group  input-group-sm">
                 <input type="text" placeholder="Buscar" className="input input-bordered outline-none shadow-none input-sm w-full max-w-x w-56 border-r-0" />
@@ -51,13 +51,13 @@ export default function Section2() {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-2 lg:grid-grid-cols-3 lg:mt-10">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-2 lg:grid-cols-3 md:mt-10">
             <CardProfessional image={"/images/profile/grid/profile1.png"} name={"Maria conceição"} starts={2} job={"diarista"}/>
             <CardProfessional image={"/images/profile/grid/profile1.png"} name={"Maria conceição"} starts={2} job={"diarista"}/>
             <CardProfessional image={"/images/profile/grid/profile1.png"} name={"Maria conceição"} starts={2} job={"diarista"}/>
           </div>
-          <div className="flex w-full justify-center lg:mt-20 px-24 md:px-0">
-            <button className="btn btn-primary gap-3 w-full md:1/2 lg:w-1/4">
+          <div className="flex w-full justify-center md:mt-20 lg:mt-20 px-24 md:px-0">
+            <button className="btn btn-primary gap-3 w-full md:w-1/2 lg:w-1/4">
               <HiPlus size={20}/> Ver mais 
             </button>
           </div>

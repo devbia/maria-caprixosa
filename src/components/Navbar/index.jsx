@@ -39,13 +39,13 @@ export default function Navbar() {
 
   return (
     <div className="w-full flex flex-col relative ">
-      <div className="navbar bg-base-100 md:px-24 py-4 justify-between flex">
+      <div className="navbar bg-base-100 md:px-18 lg:px-20 py-4 justify-between flex">
         <div className="navbar-start hidden lg:flex">
           <div className="flex justify-center gap-5">
             {pages.map(({ text, path }) => <NavbarItem key={text} text={text} path={path} selected={router.pathname == path} />)}
           </div>
         </div>
-        <div className="flex md:w-auto w-full  ">
+        <div className="flex  w-full lg:w-auto ">
           <div className="flex justify-center w-full">
             <img src="/images/global/navbar-logo.png" alt="Maria Caprixosa - logo" />
           </div>
@@ -61,8 +61,8 @@ export default function Navbar() {
           </div>
         </div>
         <div className="navbar-end gap-4 hidden lg:flex">
-          <Link href="/profiles" className="btn btn-primary">Quero contratar</Link>
-          <a href="#register" className="btn btn-secondary">Quero me escrever</a>
+          <Link href="/profiles" className="btn btn-primary md:btn-sm">Quero contratar</Link>
+          <a href="#register" className="btn btn-secondary md:btn-sm">Quero me escrever</a>
         </div>
       </div>
       <motion.nav   animate={ckRef?.current?.checked ? "open" : "closed"}

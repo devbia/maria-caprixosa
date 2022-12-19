@@ -1,15 +1,12 @@
-
-import TabTemplate from "./TabTemplate";
 import InputMask from 'react-input-mask';
 import { TiPlus } from 'react-icons/ti';
 import { TiMinus } from 'react-icons/ti';
+import { CheckBox } from "../Form";
+import { TabTemplateMobile } from "./TabTemplate";
 import { useState } from "react";
 
-import { CheckBox } from "../Form";
-
-export const Services = ({services = []}) => {
-
-  const items = [
+export const Services = ({beforeItem, id="services"}) => {
+   const items = [
         "Varrição dos ambientes;",
         "Limpeza de pisos e paredes;",
         "Retirada de pó e outras sujeiras de móveis e cômodos;",
@@ -20,20 +17,18 @@ export const Services = ({services = []}) => {
   ];
 
   return (
-     <TabTemplate title={"Serviços"} id={"teste"} subtitle={"Descrição dos serviços realizados nessa categoria selecionada"}>
-      <div className="flex h-full flex-col py-2">
-        <ul className="flex flex-col">
-          {items.map((item, i)=> <li key={i}>{item}</li>)}
-        </ul>
+    <TabTemplateMobile title={"Serviços"} id={id} beforeItem={beforeItem} subtitle={"Descrição dos serviços realizados nessa categoria selecionada."}>
+        <div className="flex h-full flex-col py-2 md:mt-6">
+          <ul className="flex flex-col">
+            {items.map((item, i)=> <li key={i}>{item}</li>)}
+          </ul>
       </div>
-     </TabTemplate>
-    );
+    </TabTemplateMobile>
+  );
 }
 
-
-export const Periodo = ({ periods = []}) => {
-
-  const [periodo, setPeriodo] = useState(1);
+export const Periodo = ({beforeItem, id="periodo"}) => {
+   const [periodo, setPeriodo] = useState(1);
   const max = 3;
 
   const add = () => {
@@ -50,9 +45,9 @@ export const Periodo = ({ periods = []}) => {
   }
 
   return (
-     <TabTemplate title={"Periodos"} id={"periodos"} subtitle={"Quantos dias na semana?"}>
+     <TabTemplateMobile title={"Periodos"} id={id} beforeItem={beforeItem} subtitle={"Quantos dias na semana?"}>
       <div className="flex w-full py-2">
-        <div className="grid grid-cols-2 gap-24">
+        <div className="grid grid-cols-1 gap-4">
             <div className="flex flex-col justify-end w-full h-full py-3 gap-3">
               <div className="flex justify-center w-full gap-3">
                   <button className="btn btn-sm btn-ghost btn-outline" onClick={remove}>
@@ -71,13 +66,13 @@ export const Periodo = ({ periods = []}) => {
             </div>
             <div className="flex flex-col justify-end w-full h-full py-3 gap-3">
                 <div className="flex flex-col gap-2">
-                  <div className="flex w-full gap-5 mb-2">
+                  <div className="flex justify-center w-full gap-5 mb-2">
                     <div className="flex gap-3">
-                      <input type="checkbox" className="checkbox" />
+                      <input type="checkbox" className="checkbox checkbox-primary" />
                       Manhã
                     </div>
                     <div className="flex gap-3">
-                      <input type="checkbox" className="checkbox" />
+                      <input type="checkbox" className="checkbox checkbox-primary" />
                       Tarde
                     </div>
                   </div>
@@ -88,20 +83,19 @@ export const Periodo = ({ periods = []}) => {
                     Clique e veja.
                   </a>
                 </div>
-               
             </div>
         </div>
       </div>
-     </TabTemplate>
+     </TabTemplateMobile>
     );
 }
 
-export const LocationCity = ({ periods = []}) => {
+export const LocationCity = ({ beforeItem, id="locationCity"}) => {
   return (
-     <TabTemplate title={"Moro em"} id={"location_city"} subtitle={"Qual o tipo da sua moradia?"}>
+     <TabTemplateMobile title={"Moro em"} beforeItem={beforeItem} id={id} subtitle={"Qual o tipo da sua moradia?"}>
           <div className="flex flex-col justify-center h-full pt-8">
-            <div className="flex justify-around mb-3">
-              <div className="flex gap-3">
+            <div className="flex  flex-col justify-around gap-4 mb-8">
+              <div className="flex  gap-3">
                 <input type="checkbox" className="checkbox" />
                 Apartamento Padrão
               </div>
@@ -120,11 +114,11 @@ export const LocationCity = ({ periods = []}) => {
               </span>
             </div>
         </div>
-     </TabTemplate>
+     </TabTemplateMobile>
     );
 }
 
-export const Comodos = ({ comodos = []}) => {
+export const Comodos = ({beforeItem, id="comodos" }) => {
 
   const [quartos, setQuartos] = useState(1);
   const [cozinha, setCozinha] = useState(1);
@@ -139,7 +133,7 @@ export const Comodos = ({ comodos = []}) => {
 
   const inputQuantity = (value, text, add, remove) => {
     return (
-       <div className="flex w-full gap-3 max-w-1/2 justify-between mb-3">
+       <div className="flex w-full gap-3  justify-between mb-3">
           <button className="btn btn-sm btn-ghost btn-outline" onClick={remove}>
             <TiMinus size={15}/>
           </button>
@@ -154,42 +148,43 @@ export const Comodos = ({ comodos = []}) => {
   }
 
   return (
-     <TabTemplate title={"Comodos"} id={"comodos"} subtitle={"Quantos comodos?"}>
-      <div className="w-full flex-col h-full flex pt-8">
-          <div className="grid grid-cols-2">
-            <div className="flex flex-col w-1/2 gap-8">
+     <TabTemplateMobile title={"Comodos"} id={"comodos"} beforeItem={beforeItem} subtitle={"Quantos comodos?"}>
+      <div className="w-full  flex-col md:flex-row h-full flex pt-3 max-h-80 md:max-h-full overflow-auto">
+          <div className="flex md:max-w-sm flex-col px-16 justify-center w-full">
               {inputQuantity(quartos, "Quarto", addQuarto, removeQuarto)}
               {inputQuantity(cozinha, "Cozinha", addCozinha, removeCozinha)}
-              <CheckBox label="Com área externa" checkboxClass="checkbox-primary" labelClass="font-bold"/>
-              <CheckBox label="Outros" checkboxClass="checkbox-primary" labelClass="font-bold"/>
-            </div>
-            <div className="flex flex-col w-1/2 gap-8">
               {inputQuantity(banheiro, "Banheiro", addBanheiro, removeBanheiro)}
+          </div>
+          <div className="flex flex-col gap-6 mt-6 py-3">
+             <CheckBox label="Com área externa" checkboxClass="checkbox-primary" labelClass="font-bold"/>
+              <CheckBox label="Outros" checkboxClass="checkbox-primary" labelClass="font-bold"/>
               <CheckBox label="Sala e cozinha (Integrada)" checkboxClass="checkbox-primary" labelClass="font-bold"/>
               <CheckBox label="Sem área externa" checkboxClass="checkbox-primary" labelClass="font-bold"/>
-            </div>
           </div>
       </div>
-     </TabTemplate>
+     </TabTemplateMobile>
     );
 }
 
-export const Location = ({ location = []}) => {
+
+export const Location = ({beforeItem, id="location"}) => {
   return (
-     <TabTemplate title={"Localização"} id={"location"} subtitle={"Qual local para presta o serviço?"}>
-      <div className="flex justify-between py-8">
+     <TabTemplateMobile title={"Localização"} beforeItem={beforeItem} id={id} subtitle={"Qual local para presta o serviço?"}>
+      <div className="flex flex-col justify-between py-8">
           <div className="form-control w-full max-w-xs">
             <label className="label">
               <span className="label-text font-bold text-lg">Informe seu cep:</span>
             </label>
-            <InputMask mask="99999-999" type="text" placeholder="00000-000" className="input input-bordered w-full max-w-xs" />
+            <div className="flex justify-center">
+              <InputMask mask="99999-999" type="text" placeholder="00000-000" className="input input-bordered w-full max-w-xs" />
+            </div>
           </div>
-          <div className="flex flex-col h-full justify-center w-56">
+          <div className="flex flex-col h-full justify-center w-full mt-3">
             <span className="text-gray-400">
               Veja a diarista mais proxima informando o seu cep.
             </span>
           </div>
       </div>
-     </TabTemplate>
+     </TabTemplateMobile>
     );
 }
