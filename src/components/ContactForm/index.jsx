@@ -4,29 +4,70 @@ import InputMask from "react-input-mask";
 import { motion } from "framer-motion";
 
 
+import { TabContext } from "../../hooks/TabContext";
+import { useContext, useEffect,useState } from "react";
 
-export default function ContactForm({ isMobile = false, isOpen = false, bottomHeight = 0}){
-  const variants = {
-    open: { opacity: 1,  top: -500 - bottomHeight },
-    closed: { opacity: 0,  top: -3000 },
-  }
+export default function ContactForm({isMobile = false, bottomHeight = 0}){
 
+  const { tabOpen } = useContext(TabContext); 
+
+  const [isReady, setIsReady] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isFetching, setIsFetching] = useState(false);
+
+   const variants = {
+      open: {height:"100%"},
+      closed: {
+        height: isMobile ?  0 : "100%"
+      }
+    }
+  
+  useEffect(() =>{
+    setTimeout(() => setIsReady(true), 2999);
+  }, []);
+
+  useEffect(() => {
+    setIsOpen(tabOpen == "contact");
+  }, [tabOpen]);
+
+
+  function handleForm(){
+    setIsFetching(true);
+
+    setTimeout(() =>{
+      setIsFetching(false);
+
+    },2000);
+  }   
   return (
     <motion.div 
-     animate={isMobile && isOpen ? "open" : "closed"}
-     variants={isMobile ? variants : {}}
+     animate={isOpen ? "open" : "closed"}
+     variants={variants}
+     
      transition={{ease: "easeOut", duration: .5}}
-    className={`flex flex-col bg-[#B9A1B7] w-full p-5 justify-start max-w-full md:max-w-sm rounded-lg 
+    className={`
+            ${isMobile && isReady ? "fixed" : "hidden"}
+            ${isMobile && `
+            h-full
+            -bottom-10
+            pb-20`}
 
-              ${isMobile && 'absolute'}
-            `}>
-
+            md:py-5
+            md:h-auto
+            md:flex 
+            flex-col bg-[#B9A1B7] 
+            w-full 
+            p-5 
+            justify-start 
+            max-w-full 
+            md:max-w-sm rounded-lg
+          `}>
             <div className="flex flex-col mb-6">
               <span className="uppercase font-extrabold mb-2">CONTATE-nos</span>
               <p>Queremos falar mais com você, informe seus dados!</p>
             </div>
 
-            <div className="form-control w-full max-w-xs mb-2">
+            <div className="form-control w-full max-w-xs mb-2 justify-center md:justify-start">
               <label className="label">
                 <span className="label-text font-bold">Seu nome</span>
               </label>
@@ -46,10 +87,9 @@ export default function ContactForm({ isMobile = false, isOpen = false, bottomHe
               <input type="email" placeholder="Ex: seuemail@email.com" className="input input-bordered w-full md:max-w-xs" />
             </div>
             <div className="mb-4">
-              <CheckBox label={"Concordo em receber comunicações"} checkboxClass="checkbox-info" />
+              <CheckBox label={"Concordo em receber comunicações"} checkboxClass="checkbox-primary" defaultChecked={false} />
             </div>
-
-            <button className="btn btn-info font-bold">
+            <button disabled={isFetching} onClick={handleForm} className={`btn btn-info w-full md:w-auto font-bold ${isFetching && 'loading'}`}>
               Enviar
             </button>
     </motion.div>

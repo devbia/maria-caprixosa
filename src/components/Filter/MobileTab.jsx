@@ -4,6 +4,8 @@ import { TiMinus } from 'react-icons/ti';
 import { CheckBox } from "../Form";
 import { TabTemplateMobile } from "./TabTemplate";
 import { useState } from "react";
+import SubFilter from "./SubFilter";
+import axios from "axios";
 
 export const Services = ({beforeItem, id="services"}) => {
    const items = [
@@ -28,8 +30,10 @@ export const Services = ({beforeItem, id="services"}) => {
 }
 
 export const Periodo = ({beforeItem, id="periodo"}) => {
-   const [periodo, setPeriodo] = useState(1);
-  const max = 3;
+  const [periodo, setPeriodo] = useState(1);
+  const [periodoDia, setPeriodoDia] = useState("manha"); // manha || tarde
+  const [showTimes, setShowTimes] = useState(false); // manha || tarde
+  const [horaDoDia, setHoraDoDia] = useState("manha"); // manha || tarde
 
   const add = () => {
     if(periodo < 3)
@@ -43,10 +47,37 @@ export const Periodo = ({beforeItem, id="periodo"}) => {
     else 
       setPeriodo(1);
   }
+  const closeSubMenu = () => {
+    setShowTimes(!showTimes);
+  }
+
+
+  function blockTime(title, start = "", end = "", selected = false, selecionarItem) {
+
+    return (
+      <div className="flex justify-between w-full">
+        <div onClick={selecionarItem} className={`flex flex-col w-full gap-3  rounded-lg p-3 hover:bg-[#d3c5d6] ${selected && "bg-[#d3c5d6]"}`}>
+              <div className="flex w-full justify-center">
+                <span className="font-bold self-center">
+                {title}
+              </span>
+              </div>
+              <div className="flex w-full justify-between">
+                <span>
+                  {start}
+                </span>
+                <span>
+                  {end}
+                </span>
+              </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
      <TabTemplateMobile title={"Periodos"} id={id} beforeItem={beforeItem} subtitle={"Quantos dias na semana?"}>
-      <div className="flex w-full py-2">
+      <div className="flex w-full py-2 relative">
         <div className="grid grid-cols-1 gap-4">
             <div className="flex flex-col justify-end w-full h-full py-3 gap-3">
               <div className="flex justify-center w-full gap-3">
@@ -68,43 +99,74 @@ export const Periodo = ({beforeItem, id="periodo"}) => {
                 <div className="flex flex-col gap-2">
                   <div className="flex justify-center w-full gap-5 mb-2">
                     <div className="flex gap-3">
-                      <input type="checkbox" className="checkbox checkbox-primary" />
+                      <input 
+                          type="checkbox" 
+                          className="checkbox checkbox-primary" 
+                          checked={periodoDia == "manha"} 
+                          onClick={_=>setPeriodoDia("manha")}/>
                       Manhã
                     </div>
                     <div className="flex gap-3">
-                      <input type="checkbox" className="checkbox checkbox-primary" />
+                      <input type="checkbox" 
+                      className="checkbox checkbox-primary" 
+                      checked={periodoDia == "tarde"} 
+                      onClick={_=>setPeriodoDia("tarde")}/>
                       Tarde
                     </div>
                   </div>
                   <div className="span font-bold">
                     Quais os horários?
                   </div>
-                  <a className="span text-gray-500 font-bold cursor-pointer">
+                  <a onClick={() => setShowTimes(!showTimes)} className="span text-gray-500 font-bold cursor-pointer">
                     Clique e veja.
                   </a>
                 </div>
             </div>
         </div>
+
+          <SubFilter isMobile={true} isOpen={showTimes} close={closeSubMenu} title="Os horários">
+            <div className="grid grid-cols-1 gap-5">
+                <div className="flex justify-between mt-3">
+                  {blockTime('Manhã', "07:00", "13:00", horaDoDia == "manha", () => setHoraDoDia("manha"))}
+                  {blockTime('Tarde', "13:00", "18:00", horaDoDia == "tarde", () => setHoraDoDia("tarde"))}
+                </div>
+                 <div className={`flex h-full justify-cente rounded-lg hover:bg-[#d3c5d6] p-5 ${horaDoDia == "combinar" && "bg-[#d3c5d6]"}`} onClick={_ => setHoraDoDia("combinar")}  >
+                  <span className="self-center">A combinar com a Diarista</span>
+                </div>
+            </div>
+          </SubFilter>
       </div>
+
      </TabTemplateMobile>
     );
 }
 
 export const LocationCity = ({ beforeItem, id="locationCity"}) => {
+  const [checked, setChecked] =  useState("apartamento_padrao");
+
+  const changeItem = (item) => {
+    setChecked(item);
+  }
   return (
      <TabTemplateMobile title={"Moro em"} beforeItem={beforeItem} id={id} subtitle={"Qual o tipo da sua moradia?"}>
           <div className="flex flex-col justify-center h-full pt-8">
             <div className="flex  flex-col justify-around gap-4 mb-8">
               <div className="flex  gap-3">
-                <input type="checkbox" className="checkbox" />
+                <input type="checkbox" className="checkbox checkbox-primary"
+                    checked={checked == "apartamento_padrao"}
+                       onClick={_=>changeItem("apartamento_padrao")} />
                 Apartamento Padrão
               </div>
               <div className="flex gap-3">
-                <input type="checkbox" className="checkbox" />
+                <input type="checkbox" className="checkbox checkbox-primary"
+                checked={checked == "casa"}
+                       onClick={_=>changeItem("casa")} />
                 Casa
               </div>
               <div className="flex gap-3">
-                <input type="checkbox" className="checkbox" />
+                <input type="checkbox" className="checkbox checkbox-primary" 
+                       checked={checked == "outros"}
+                       onClick={_=>changeItem("outros")}/>
                 Outros
               </div>
             </div>
@@ -168,22 +230,102 @@ export const Comodos = ({beforeItem, id="comodos" }) => {
 
 
 export const Location = ({beforeItem, id="location"}) => {
+  const [showTimes, setShowTimes] = useState(false); 
+  const [invalidCEP, setInvalidCEP] = useState(false); 
+  const [estado, setEstado] = useState(""); 
+  const [cidade, setCidade] = useState(""); 
+  const [endereco, setEndereco] = useState(""); 
+  const [bairro, setBairro] = useState(""); 
+  const [cep, setCep] = useState(""); 
+  const closeSubMenu = () => {
+      setShowTimes(!showTimes);
+  }
+
+
+  const getCep = async (event) => {
+    try {
+      setInvalidCEP(false);
+      let cepInput = event.target.value.replace(/[^0-9]/g, '');
+      console.log(cepInput);
+      if(cepInput.length != 8)
+        return;
+
+      const { data } = await axios.get(`https://viacep.com.br/ws/${event.target.value}/json/`);
+
+      if(data?.cep){
+      
+        setEstado(data.uf);
+        setCidade(data.localidade);
+        setEndereco(data.logradouro);
+        setBairro(data.bairro);
+        setCep(data.cep);
+        setShowTimes(true);  
+      }
+      else {
+        setInvalidCEP(true); 
+        setShowTimes(false);
+      }
+    } catch (error) {
+      console.log(error);
+      setInvalidCEP(true);
+      setShowTimes(false);
+    }
+  }
+
+
   return (
      <TabTemplateMobile title={"Localização"} beforeItem={beforeItem} id={id} subtitle={"Qual local para presta o serviço?"}>
-      <div className="flex flex-col justify-between py-8">
+      <div className="flex flex-col md:w-full justify-between py-8">
           <div className="form-control w-full max-w-xs">
             <label className="label">
               <span className="label-text font-bold text-lg">Informe seu cep:</span>
             </label>
             <div className="flex justify-center">
-              <InputMask mask="99999-999" type="text" placeholder="00000-000" className="input input-bordered w-full max-w-xs" />
+                <InputMask onChange={getCep} mask="99999-999" type="text" placeholder="00000-000" className={`input input-bordered w-full max-w-xs ${invalidCEP && 'input-error'}`} />
             </div>
+             {invalidCEP && <small className="text-red-500 mt-3">CEP não encontrado</small>}
           </div>
           <div className="flex flex-col h-full justify-center w-full mt-3">
             <span className="text-gray-400">
               Veja a diarista mais proxima informando o seu cep.
             </span>
           </div>
+           <SubFilter isOpen={showTimes} close={closeSubMenu}>
+            <div className="grid grid-cols-1 md:grid-cols-2 md:px-11 w-full overflow-y-scroll max-h-48  md:max-h-auto">
+              <div className="flex flex-col w-full gap-5">
+                <div className="flex flex-col w-full">
+                  <label htmlFor="estado" className="font-bold">Estado</label>
+                  <span id="estado">{estado}</span>
+                </div>
+                <div className="flex flex-col w-full">
+                  <label htmlFor="cidade" className="font-bold">Cidade</label>
+                  <span id="cidade">{cidade}</span>
+                </div>
+                <div className="flex flex-col w-full">
+                  <label htmlFor="endereco" className="font-bold">Endereço</label>
+                  <span id="endereco">{endereco}</span>
+                </div>
+                <div className="flex flex-col w-full">
+                  <label htmlFor="bairro" className="font-bold">Bairro</label>
+                  <span id="bairro">{bairro}</span>
+                </div>
+              </div>
+              <div className="flex flex-col w-full gap-5">
+                 <div className="flex flex-col w-full">
+                  <label htmlFor="cep" className="font-bold">CEP</label>
+                  <span id="cep">{cep}</span>
+                 </div>
+                 <div className="flex flex-col w-full">
+                  <label htmlFor="numero"  className="font-bold">N°</label>
+                  <InputMask id="numero" onChange={ () => null}  maxLength={15} type="text" placeholder="Informe o número" className="input input-bordered w-full max-w-xs" />
+                 </div>
+                 <div className="flex flex-col w-full">
+                  <label htmlFor="complemento" className="font-bold">Complemento</label>
+                  <InputMask id="complemento" onChange={ () => null}  maxLength={100} type="text" placeholder="Informe o complemento" className="input input-bordered w-full max-w-xs" />
+                 </div>
+              </div>
+            </div>
+          </SubFilter>
       </div>
      </TabTemplateMobile>
     );

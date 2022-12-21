@@ -4,8 +4,12 @@ import { TextTracking } from '../Typography';
 import { FaSearch } from 'react-icons/fa'; 
 import { HiPlus } from 'react-icons/hi'; 
 import CardProfessional from "../Profile/CardProfessional";
+import { useState } from 'react';
 
 export default function Section2() {
+
+  const [isFetching, setIsFetching] = useState(false);
+
   const info = [
     {
       image: "/images/profile/icons/chat.png",
@@ -22,6 +26,15 @@ export default function Section2() {
     },
 
   ];
+
+
+  function fetchMoreProfiles(){
+    setIsFetching(true);
+
+    setTimeout(() => {
+      setIsFetching(false); 
+    }, 2000);
+  }
 
   return (
     <div className="flex flex-col w-full bg-[#E4DFE0]">
@@ -57,8 +70,8 @@ export default function Section2() {
             <CardProfessional image={"/images/profile/grid/profile1.png"} name={"Maria conceição"} starts={2} job={"diarista"}/>
           </div>
           <div className="flex w-full justify-center md:mt-20 lg:mt-20 px-24 md:px-0">
-            <button className="btn btn-primary gap-3 w-full md:w-1/2 lg:w-1/4">
-              <HiPlus size={20}/> Ver mais 
+            <button onClick={fetchMoreProfiles} disabled={isFetching} className={`btn btn-primary gap-3 w-full md:w-1/2 lg:w-1/4 ${isFetching && "loading"}`}>
+              {!isFetching && <HiPlus size={20}/>} Ver mais 
             </button>
           </div>
         </div>

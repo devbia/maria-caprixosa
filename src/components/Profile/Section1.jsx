@@ -7,10 +7,11 @@ import Modal from '../Modal';
 import { TextTracking } from '../Typography';
 import ModalSection from './ModalSection';
 
+import { motion } from 'framer-motion';
+
 export default function Section1({ profile }) {
 
-  const [profiles, setProfiles] = useState([]);
-
+  const [isFetching, setIsFetching] = useState(false); 
   const [selectedProfile, setSelectedProfile] = useState({
     name: "Maria Conceição",
     image: "/images/profile/banner/profile1.png",
@@ -53,14 +54,21 @@ export default function Section1({ profile }) {
     }
   }
 
+  function handleForm() {
+    setIsFetching(true);
+
+    setTimeout(() =>{
+      setIsFetching(false); 
+    },2000);
+  }
+
   useEffect(()=> {
-    
     loadProfiles();
   }, []);
   
 
   return (
-    <div className="flex flex-col w-full bg-accent md:bg-[bottom_left_6rem] bg-no-repeat md:bg-[url('/images/about-us/house.png')]">
+    <motion.div   animate={{opacity: 1 }}  initial={{ opacity: 0 }} transition={{ease: "easeOut", duration: 2}} className="flex flex-col w-full bg-accent md:bg-[bottom_left_6rem] bg-no-repeat md:bg-[url('/images/about-us/house.png')]">
       <div className="flex flex-col-reverse md:flex-row w-full h-full justify-center">
         <div className="flex flex-col max-w-md flex-1 md:pt-24 justify-around gap-5 lg:gap-0">
           <div className="flex flex-col px-2 md:px-0 gap-5 lg:gap-0">
@@ -154,10 +162,10 @@ export default function Section1({ profile }) {
             </div>
           </div>
           <div className="flex justify-center pt-8">
-             <a href="#" className="btn  btn-primary lg:w-60">Enviar</a>
+             <button onClick={handleForm} disabled={isFetching} className={`btn  btn-primary lg:w-60 ${isFetching && "loading"}`}>Enviar</button>
           </div>
         </div>
       </Modal>
-    </div>
+    </motion.div>
   );
 }

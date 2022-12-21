@@ -3,28 +3,29 @@ import Container from "../Container";
 import { FiFilter } from 'react-icons/fi';
 import { TextTracking } from "../Typography";
 import { CheckBox } from "../Form";
-import { Services, Periodo, LocationCity, Comodos, Location } from "../Tabs";
 
 import { motion } from "framer-motion";
 import { useContext } from "react";
 import { FilterFormContext } from "../../hooks/FilterFormContext";
 import { FilterMobileContext } from "../../hooks/FilterMobileContext";
 
+import { useRouter } from "next/router";
+import DesktopFilter from "../Filter/DesktopFilter";
+
 export default function Section2() {
 
-  const {choosedOption, setChoosedOption } = useContext(FilterFormContext)
-  const {filterMobileOpen, setFilterMobileOpen} = useContext(FilterMobileContext);
 
-  const toggleCheckBox = (option) => {
-    setChoosedOption(choosedOption == option ? null : option);
-  }
+  const {choosedOption, setChoosedOption } = useContext(FilterFormContext)
+  const {setFilterMobileOpen} = useContext(FilterMobileContext);
+
+  const toggleCheckBox = (option) => setChoosedOption(choosedOption == option ? null : option);
  
   return (
     <Container className="bg-gradient-to-b from-[#DEAEBB] to-[#F0ECF1] pt-8 pb-4">
       <div className="flex flex-col">
         <motion.div  initial="hidden"
-  whileInView="visible"
-  viewport={{ once: true }}>
+          whileInView="visible"
+          viewport={{ once: true }}>
           <div className="flex justify-center my-10 md:my-14">
             <TextTracking>
               A procura de uma caprixosa?
@@ -32,7 +33,7 @@ export default function Section2() {
           </div>
           <div className="flex flex-col md:flex-row justify-center gap-8 mb-10 md:mb-14">
             <CheckBox name="category" checked={choosedOption == "faxineira"} onClick={_=>toggleCheckBox("faxineira")} label={"faxineira"} checkboxClass="checkbox-primary" labelClass="uppercase font-bold"/>
-            <CheckBox name="category" checked={choosedOption == "diarista"} onClick={_=>toggleCheckBox("diarista")}  label={"diarista"} checkboxClass="checkbox-primary" labelClass="uppercase font-bold"/>
+            <CheckBox name="category" checked={choosedOption == "diarista"}  onClick={_=>toggleCheckBox("diarista")}  label={"diarista"} checkboxClass="checkbox-primary" labelClass="uppercase font-bold"/>
             <CheckBox name="category" checked={choosedOption == "domestica"} onClick={_=>toggleCheckBox("domestica")}  label={"doméstica"} checkboxClass="checkbox-primary" labelClass="uppercase font-bold"/>
           </div>
         </motion.div>
@@ -45,21 +46,7 @@ export default function Section2() {
           </button>
 
           {/* Filter desktop */}
-          <div className="mx-14 hidden lg:flex rounded py-4 bg-[#f0ecf1]  w-full px-4">
-            <div className="flex relative w-full">
-              <div className="flex flex-col justify-center"><FiFilter size={30} /></div>
-              <div className="flex flex-1  w-full justify-between px-24">
-                <Services />
-                <Periodo/>
-                <LocationCity/> 
-                <Comodos/> 
-                <Location/>
-              </div>
-              <div className="flex flex-col justify-center">
-                <button className="btn btn-primary w-40 btn-sm">buscar</button>
-              </div>
-            </div>
-          </div>
+          <DesktopFilter/>
         </div>
       </div>
       <div className="py-10 md:py-28 mx-14 ">

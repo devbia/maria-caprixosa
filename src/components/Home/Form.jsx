@@ -1,6 +1,5 @@
 
 import ContactForm from "../ContactForm";
-import { CheckBox } from "../Form";
 
 export default function Form(){
   return (

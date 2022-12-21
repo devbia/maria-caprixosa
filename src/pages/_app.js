@@ -5,6 +5,7 @@ import Head from 'next/head';
 import FilterContextProvider from '../hooks/FilterContext'; 
 import FilterFormProvider from '../hooks/FilterFormContext'; 
 import FilterMobileProvider from '../hooks/FilterMobileContext'; 
+import TabContextProvider from '../hooks/TabContext';
 
 import '../styles/globals.css';
 
@@ -17,6 +18,7 @@ const heebo = Heebo({
 function MariaCaprixosa({ Component, pageProps }) {
   return (
     <>
+    <TabContextProvider>
     <FilterMobileProvider>
       <FilterFormProvider>
         <FilterContextProvider>
@@ -28,7 +30,8 @@ function MariaCaprixosa({ Component, pageProps }) {
         </main>
         </FilterContextProvider>
       </FilterFormProvider>
-    </FilterMobileProvider>
+     </FilterMobileProvider>
+    </TabContextProvider>
     </>
   )
 }

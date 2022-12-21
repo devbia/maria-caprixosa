@@ -32,8 +32,8 @@ export const TabTemplateMobile = ({title, id, beforeItem = "", choose = "Diarist
   if(itemOpen != id)
     return null;
 
-  return (
-    <div className="flex flex-col w-full h-full">
+  return ( 
+    <div className="flex flex-col w-full h-full z-20" tabIndex={99}>
       <div className="flex flex-col gap-3">
         <div className="flex mb-2 pt-2 text-lg font-bold" onClick= {_=> changeView()}>
           <div className="flex h-full flex-col justify-center" ><MdArrowBackIos size={15}/></div>{title}
@@ -47,7 +47,7 @@ export const TabTemplateMobile = ({title, id, beforeItem = "", choose = "Diarist
           {subtitle}
         </div>
       </div>
-      <div className="flex">
+      <div className="flex w-full">
         {children}
       </div>
     </div>

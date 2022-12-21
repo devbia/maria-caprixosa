@@ -2,7 +2,14 @@
 import Container from "../Container";
 import { motion } from "framer-motion";
 import { TextTracking } from "../Typography";
+
+import { TabContext } from '../../hooks/TabContext';
+import { useContext } from "react";
+
 export default function Section1() {
+
+  const {tabOpen, setTabOpen} = useContext(TabContext);
+
   return (
  <Container className="bg-accent">
       <motion.div animate={{opacity: 1 }}  initial={{ opacity: 0 }} transition={{ease: "easeOut", duration: 2}} className="w-full">
@@ -31,9 +38,12 @@ export default function Section1() {
                 </div>
               </div>
               <div className="flex w-full md:justify-center lg:justify-end pt-4 md:pt-8 lg:pt-3">
-                <a href="#contact_form" className="btn btn-primary w-full md:w-auto">
+                <a  href="#contact_form" className="hidden md:flex btn btn-primary w-full md:w-auto">
                   Saiba como
                 </a>
+                <button onClick={() => setTabOpen("contact")} className="btn btn-primary md:hidden w-full md:w-auto">
+                  Saiba como
+                </button>
               </div>
             </div>
           </div>

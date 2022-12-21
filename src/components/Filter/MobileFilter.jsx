@@ -1,20 +1,25 @@
 
 import { useContext, useEffect, useState } from "react";
 import { FilterMobileContext } from "../../hooks/FilterMobileContext";
+import { TabContext } from "../../hooks/TabContext";
 
 import { motion } from 'framer-motion'; 
 
-import { Comodos, Location, LocationCity, Periodo, Services } from "../Tabs/MobileTab";
+import { Comodos, Location, LocationCity, Periodo, Services } from "./MobileTab";
 
 import { MdNavigateNext } from 'react-icons/md';
 import { FaSearch } from 'react-icons/fa';
+import { useRouter } from "next/router";
 
 export default function MobileFilter(){
   const [ready, setReady] = useState(false); 
   const { filterMobileOpen, itemOpen, setItemOpen } = useContext(FilterMobileContext); 
-  
+  const { setTabOpen } = useContext(TabContext); 
+   
+  const router = useRouter(); 
   const [current, setCurrent] = useState(0);  
   const [isLast, setLast] = useState(false);  
+  const [isFetching, setIsFetching] = useState(false);  
 
   const sequence = ["services", "periodo", "locationCity", "comodos", "location"];
 
@@ -37,18 +42,30 @@ export default function MobileFilter(){
       console.log(sequence[newTab]);
     }
   }
-    useEffect(() => {
-      setInterval(() => setReady(true), 1999);
-    }, []);
+
+
+  const goToSearch = () => {
+    setTabOpen(null); 
+
+    setIsFetching(() => {
+  
+      router.push("/profiles")
+    },999);
     
-    useEffect(() => {
-      setLast(itemOpen == "location");
-    }, [itemOpen]);
+  }
+
+  useEffect(() => {
+    setInterval(() => setReady(true), 1999);
+  }, []);
+    
+  useEffect(() => {
+    setLast(itemOpen == "location");
+  }, [itemOpen]);
 
 
 
   return (
-    <motion.div className={`fixed h-full -bottom-3 md:-bottom-20 w-full py-10 z-10 ${ready ? "lg:hidden" : "hidden"}`}  
+    <motion.div className={`fixed h-full -bottom-3 md:-bottom-20 w-full py-10 z-10   ${ready ? "lg:hidden" : "hidden"}`}  
        animate={filterMobileOpen ? 'open' : "close"} 
        variants={variants}
        transition={{ease: "easeOut", duration: 0.7}}>
@@ -62,7 +79,7 @@ export default function MobileFilter(){
                   <Location beforeItem={"comodos"}/>
                 </div>
                 <div className="flex md:justify-center">
-                    <button onClick={_ => goNext()} className="btn btn-primary w-full md:w-1/2">
+                    <button onClick={_ => !isLast ? goNext() : goToSearch() } className="btn z-40 btn-primary w-full md:w-1/2">
                       <div className="flex w-full md:justify-center">
                           <div className="flex flex-1 justify-center text-lg">
                             {isLast ? "Buscar" : "Avançar"}
