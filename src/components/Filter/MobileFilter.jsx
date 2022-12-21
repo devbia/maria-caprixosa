@@ -24,7 +24,7 @@ export default function MobileFilter(){
   const sequence = ["services", "periodo", "locationCity", "comodos", "location"];
 
   const variants = {
-      open: {height:"90%"},
+      open: {height:"100%"},
       close: {
         height: 0
       }
