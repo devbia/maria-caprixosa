@@ -7,7 +7,7 @@ export const FilterFormContext = createContext({});
 export default function FilterFormProvider({children}){
 
   const [checkSelected, setCheckSelected] = useState(null);
-  const [choosedOption, setChoosedOption] = useState("diarista");
+  const [choosedOption, setChoosedOption] = useState(null);
 
 
   return (

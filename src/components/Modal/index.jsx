@@ -1,3 +1,4 @@
+
 export default function Modal({ id, children, className = "", closeIcon = false }) {
 
   return (

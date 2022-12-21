@@ -3,20 +3,28 @@ import Footer from "../Footer";
 import MobileFilter from "../Filter/MobileFilter";
 import Navbar from "../Navbar";
 import ContactForm from "../ContactForm";
-
-
+import { useEffect } from "react";
+import { FilterMobileContext } from "../../hooks/FilterMobileContext";
+import { TabContext } from "../../hooks/TabContext";
+import { useContext } from "react";
 export default function Layout({ children }) {
+  const { setFilterMobileOpen } = useContext(FilterMobileContext);
+  const { setTabOpen } = useContext(TabContext);
+
+  useEffect(() => {
+    setFilterMobileOpen(false);
+    setTabOpen(null);
+    document.body.style.overflow = "unset";
+  }, []);
 
   return (
     <>
       <Navbar />
-      <div className="w-full">
-        {children}
-      </div>
+      <div className="w-full">{children}</div>
       <BottomMenu />
-      <MobileFilter/>
+      <MobileFilter />
       <div className="md:hidden">
-        <ContactForm isMobile={true}/>
+        <ContactForm isMobile={true} />
       </div>
       <Footer />
     </>

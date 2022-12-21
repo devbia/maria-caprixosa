@@ -9,9 +9,7 @@ import Form from "../components/Home/Form";
 export default function HomePage() {
 
   return (
-
     <Layout>
-      {/* Section one */}
       <Section1 />
       <Section2 />
       <Section3/>
