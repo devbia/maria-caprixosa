@@ -6,6 +6,7 @@ import FilterContextProvider from '../hooks/FilterContext';
 import FilterFormProvider from '../hooks/FilterFormContext'; 
 import FilterMobileProvider from '../hooks/FilterMobileContext'; 
 import TabContextProvider from '../hooks/TabContext';
+import FilterMobileContext from '../hooks/ShowAlertContext';
 
 import '../styles/globals.css';
 
@@ -18,20 +19,22 @@ const heebo = Heebo({
 function MariaCaprixosa({ Component, pageProps }) {
   return (
     <>
-    <TabContextProvider>
-    <FilterMobileProvider>
-      <FilterFormProvider>
-        <FilterContextProvider>
-          <Head>
-          <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0" />
-        </Head>
-        <main className={heebo.className}>
-          <Component {...pageProps} />
-        </main>
-        </FilterContextProvider>
-      </FilterFormProvider>
-     </FilterMobileProvider>
-    </TabContextProvider>
+    <FilterMobileContext>
+      <TabContextProvider>
+        <FilterMobileProvider>
+          <FilterFormProvider>
+            <FilterContextProvider>
+              <Head>
+              <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0" />
+            </Head>
+            <main className={heebo.className}>
+              <Component {...pageProps} />
+            </main>
+            </FilterContextProvider>
+          </FilterFormProvider>
+        </FilterMobileProvider>
+      </TabContextProvider>
+    </FilterMobileContext>
     </>
   )
 }

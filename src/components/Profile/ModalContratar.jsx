@@ -2,10 +2,15 @@ import { CheckBox, Input } from "../Form";
 import Modal from "../Modal";
 import { TextTracking } from "../Typography";
 import ModalSection from "./ModalSection";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ShowAlertContext } from "../../hooks/ShowAlertContext";
+
 
 export default function ModalContratar(){
     const [isFetching, setIsFetching] = useState(false);
+    
+    const { setAlertOpen} = useContext(ShowAlertContext);
+
     const [selectedProfile, setSelectedProfile] = useState({
       name: "Maria Conceição",
       image: "/images/profile/banner/profile1.png",
@@ -27,6 +32,7 @@ export default function ModalContratar(){
 
     setTimeout(() => {
       setIsFetching(false);
+      setAlertOpen(true);
     }, 2000);
   }
 

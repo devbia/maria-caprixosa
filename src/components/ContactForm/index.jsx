@@ -4,9 +4,21 @@ import { motion } from "framer-motion";
 
 import { TabContext } from "../../hooks/TabContext";
 import { useContext, useEffect, useState } from "react";
+import { ShowAlertContext } from "../../hooks/ShowAlertContext";
 
 export default function ContactForm({ isMobile = false, bottomHeight = 0 }) {
-  const { tabOpen } = useContext(TabContext);
+  const { tabOpen, setTabOpen } = useContext(TabContext);
+  const { alertOpen, setAlertOpen } = useContext(ShowAlertContext);
+
+  const [name, setName] = useState("");
+  const [telefone, setTelefone] = useState("");
+  const [email, setEmail] = useState("");
+  const [checkBoxOK, setCheckBoxOk] = useState(false);
+
+  const [telefoneInvalido, setTelefoneInvalido] = useState(false);
+  const [nomeInvalido, setNomeInvalido] = useState(false);
+  const [emailInvalido, setEmailInvalido] = useState(false);
+  const [checkBoxInvalido, setCheckBoxInvalido] = useState(false);
 
   const [isReady, setIsReady] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -20,6 +32,7 @@ export default function ContactForm({ isMobile = false, bottomHeight = 0 }) {
   };
 
   useEffect(() => {
+    resetForm();
     setTimeout(() => setIsReady(true), 2999);
   }, []);
 
@@ -27,11 +40,35 @@ export default function ContactForm({ isMobile = false, bottomHeight = 0 }) {
     setIsOpen(tabOpen == "contact");
   }, [tabOpen]);
 
-  function handleForm() {
-    setIsFetching(true);
+  function resetForm(){
+    setNomeInvalido(false);
+    setTelefoneInvalido(false);
+    setEmailInvalido(false);
 
-    setTimeout(() => {
-      setIsFetching(false);
+    setName("");
+    setTelefone("");
+    setEmail("");
+    setCheckBoxOk(false); 
+    document.body.style.overflow = "unset";
+  }
+
+  function handleForm() {
+    
+    setNomeInvalido(name.length < 2);
+    setTelefoneInvalido(telefone.length < 2);
+    setEmailInvalido(email.length < 2);
+
+    if(nomeInvalido || emailInvalido || checkBoxOK || telefoneInvalido)
+      return;
+      setIsFetching(true);
+      
+      setTimeout(() => {
+        
+        setIsFetching(false);
+        setAlertOpen(true);
+        resetForm();
+
+      setTimeout(() => setTabOpen(null), 1999);
     }, 2000);
   }
   return (
@@ -72,7 +109,10 @@ export default function ContactForm({ isMobile = false, bottomHeight = 0 }) {
         <input
           type="text"
           placeholder="Digite seu nome aqui..."
-          className="input input-bordered w-full md:max-w-xs"
+          className={`input input-bordered w-full md:max-w-xs ${nomeInvalido && 'border-red-500'}`}
+          onInput={(ev) => setName(ev.target.value)}
+          maxLength={150}
+          value={name}
         />
       </div>
       <p>Apenas informe, por onde nós podemos entrar em contato?</p>
@@ -82,25 +122,31 @@ export default function ContactForm({ isMobile = false, bottomHeight = 0 }) {
         </label>
         <InputMask
           mask={"(99) 9999-99999"}
+          value={telefone}
+          onInput={(ev) => setTelefone(ev.target.value)}
           type="text"
           placeholder="EX: (xx) xxxx-xxxxx"
-          className="input input-bordered w-full md:max-w-xs"
+          className={`input input-bordered w-full md:max-w-xs ${telefoneInvalido && 'border-red-500'}`}
         />
+
       </div>
       <div className="form-control w-full max-w-xs mb-4">
         <label className="label">
           <span className="label-text font-bold">E-mail</span>
         </label>
         <input
+          value={email}
           type="email"
           placeholder="Ex: seuemail@email.com"
-          className="input input-bordered w-full md:max-w-xs"
+          onInput={(ev) => setEmail(ev.target.value)}
+          className={`input input-bordered w-full md:max-w-xs ${emailInvalido && 'border-red-500'}`}
         />
       </div>
       <div className="mb-4">
         <CheckBox
           label={"Concordo em receber comunicações"}
-          checkboxClass="checkbox-primary"
+          checkboxClass={`checkbox-primary ${checkBoxInvalido && 'border-red-500'}`}
+          onClick={_=> setCheckBoxOk(!checkBoxOK)}
           defaultChecked={false}
         />
       </div>

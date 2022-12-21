@@ -1,8 +1,11 @@
 import Modal from "../Modal";
 import { TextTracking } from "../Typography";
 import { Input, Select, TextArea } from "../Form";
-import { createRef, useState } from "react";
+import { createRef, useContext, useState } from "react";
+import { ShowAlertContext } from "../../hooks/ShowAlertContext";
 export default function RegisterModal({ id }) {
+
+  const {setAlertOpen } = useContext(ShowAlertContext);
   const fileRef = createRef();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -42,6 +45,7 @@ export default function RegisterModal({ id }) {
 
     setTimeout(() => {
       setIsLoading(false);
+      setAlertOpen(true); 
     }, 1999);
   }
 
@@ -60,7 +64,7 @@ export default function RegisterModal({ id }) {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 mb-3">
         <div className="flex flex-col gap-2">
-          <Input label="Nome" placeholder="Informe seu text e sobretext" />
+          <Input label="Nome" placeholder="Informe seu nome e sobrenome" />
           <Input
             label="Categoria"
             placeholder="Se você é diarista, faxineira, doméstica"
@@ -84,6 +88,7 @@ export default function RegisterModal({ id }) {
           />
           <Input label="Cep:" mask="99999-999" placeholder="Informe seu CEP" />
           <Select label="Estado" items={estados} defaultValue="1" />
+          <Select label="Cidade" items={[{text: "Selecione uma cidade", value: '0'}]} defaultValue="1" />
           <div className="flex flex-col cursor-pointer">
             <label className="font-bold">Selecione a sua foto favorita</label>
             <input type="file" className="hidden" name="" id="" ref={fileRef} />

@@ -8,6 +8,7 @@ import { FilterMobileContext } from "../../hooks/FilterMobileContext";
 import { TabContext } from "../../hooks/TabContext";
 import { useContext } from "react";
 import ModalContratar from "../Profile/ModalContratar";
+import Alert from "../Alert";
 export default function Layout({ children }) {
   const { setFilterMobileOpen } = useContext(FilterMobileContext);
   const { setTabOpen } = useContext(TabContext);
@@ -29,6 +30,7 @@ export default function Layout({ children }) {
       </div>
 
       <ModalContratar/>
+      <Alert/>
       <Footer />
     </>
   );
