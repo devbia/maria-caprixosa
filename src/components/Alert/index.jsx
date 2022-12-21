@@ -25,9 +25,9 @@ export default function Alert(){
   }
   
   if(isSmall){
-    animation["open"]["left"] = 10;
-    animation["open"]["right"] = 10;
-    animation["open"]["bottom"] = 10;
+    animation["open"]["left"] = 0;
+    animation["open"]["right"] = 0;
+    animation["open"]["bottom"] = 0;
   }
   if(isMedium){
     animation["open"]["left"] = 10;
@@ -40,6 +40,7 @@ export default function Alert(){
   useEffect(() => {
     setTimeout(() => {
       setAlertOpen(false);
+
     }, 2500);
   }, [alertOpen]);
 
