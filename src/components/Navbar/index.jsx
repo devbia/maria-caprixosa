@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 const variants = {
   open: { opacity: 1, height: 120 },
-  closed: { opacity: 0, height: 0 },
+  closed: { opacity: 0, height: 0},
 };
 
 export default function Navbar() {
@@ -99,7 +99,7 @@ export default function Navbar() {
         initial={{ opacity: 0 }}
         variants={variants}
         transition={{ ease: "easeOut", duration: 0.5 }}
-        className={`w-full lg:hidden dropdown-content menu flex z-10`}
+        className={`w-full lg:hidden dropdown-content menu flex z-10 lg:-z-20`}
       >
         <ul
           tabIndex={0}
