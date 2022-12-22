@@ -25,7 +25,7 @@ export const Input = (props) => (
       {...props}
       type={props?.type || "text"}
       placeholder={props?.placeholder}
-      className="input input-bordered w-full max-w-xs"
+      className={`input input-bordered w-full max-w-xs ${props?.isInvalid && 'border-red-500'}`}
     />
   </div>
 );

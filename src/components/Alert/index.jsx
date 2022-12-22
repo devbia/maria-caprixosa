@@ -15,7 +15,7 @@ export default function Alert(){
       opacity: 1,
       zIndex: 9999,
       bottom: 10,
-      left: 10,
+      left: 30,
       display: "flex"
     },
     close: {

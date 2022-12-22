@@ -9,7 +9,12 @@ import { ShowAlertContext } from "../../hooks/ShowAlertContext";
 export default function ModalContratar(){
     const [isFetching, setIsFetching] = useState(false);
     
-    const { setAlertOpen} = useContext(ShowAlertContext);
+    const { setAlertOpen, setCloseModal} = useContext(ShowAlertContext);
+
+    const [name, setName] = useState('');
+    const [telefone, setTelefone] = useState('');
+    const [invalidName, setInvalidName] = useState(false);
+    const [invalidTel, setInvalidTelefone] = useState(false);
 
     const [selectedProfile, setSelectedProfile] = useState({
       name: "Maria Conceição",
@@ -26,13 +31,30 @@ export default function ModalContratar(){
       comodos: ["1 quarto", "2 banheiro", "1 cozinha", "sem area externa"],
     });
 
-    
+  function reset() {
+    setName("");
+    setTelefone("");
+    setInvalidName(false);
+    setInvalidTelefone(false);
+    setCloseModal(false);
+  }
   function handleForm() {
+
+    setInvalidName(name.length < 2);
+    setInvalidTelefone(telefone.replaceAll(/[^0-9]/gi,'').length != 11);
+
+  
+    if(name.length < 2 || telefone.replaceAll(/[^0-9]/gi,'').length != 11)
+      return;
+
     setIsFetching(true);
 
     setTimeout(() => {
       setIsFetching(false);
       setAlertOpen(true);
+      setCloseModal(true);
+      
+      setTimeout(() =>  reset(), 999);
     }, 2000);
   }
 
@@ -118,11 +140,19 @@ export default function ModalContratar(){
             </span>
 
             <div className="flex w-full gap-8">
-              <Input label="Nome:" placeholder="Informe seu Nome e sobrenome" />
+              <Input label="Nome:" 
+               placeholder="Informe seu nome e sobrenome" 
+               isInvalid={invalidName}
+                value={name}
+                onInput={ev => setName(ev.target.value)}
+                />
               <Input
                 mask="(99) 9999-99999"
                 label="Telefone:"
                 placeholder="Informe seu telefone para contato"
+                value={telefone}
+                onInput={ev => setTelefone(ev.target.value)}
+                isInvalid={invalidTel}
               />
             </div>
           </div>
