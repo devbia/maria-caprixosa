@@ -30,7 +30,12 @@ export default function Layout({ children }) {
       </div>
 
       <ModalContratar/>
-      <Alert/>
+      <div className="md:hidden">
+        <Alert isMobile/>
+      </div>
+      <div className="hidden md:flex">
+        <Alert/>
+      </div>
       <Footer />
     </>
   );

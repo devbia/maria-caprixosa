@@ -19,7 +19,7 @@ export const CheckBox = (props) => {
 export const Input = (props) => (
   <div className="form-control w-full max-w-xs">
     <label className="label m-0 pb-0">
-      <span className="label-text bold mb-0 font-bold ">{props.label}</span>
+      <span className="label-text bold mb-0 font-bold ">{props.label} {props?.obrigatorio && <span className="text-red-500">*</span>}</span>
     </label>
     <InputMask
       {...props}

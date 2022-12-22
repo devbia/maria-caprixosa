@@ -58,7 +58,7 @@ export default function ContactForm({ isMobile = false, bottomHeight = 0 }) {
     setTelefoneInvalido(telefone.length < 2);
     setEmailInvalido(email.length < 2);
 
-    if(nomeInvalido || emailInvalido || checkBoxOK || telefoneInvalido)
+    if(nomeInvalido || emailInvalido || telefoneInvalido)
       return;
       setIsFetching(true);
       
