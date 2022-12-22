@@ -40,11 +40,9 @@ export const TextArea = (props) => {
       </label>
       <textarea
         {...props}
-        defaultValue={props.children}
         placeholder={placeholder || ""}
         className="textarea resize-none textarea-bordered w-full"
       >
-        {" "}
       </textarea>
     </div>
   );

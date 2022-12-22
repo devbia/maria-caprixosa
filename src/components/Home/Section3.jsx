@@ -87,6 +87,11 @@ export default function Section3() {
           </div>
         </div>
       </div>
+
+
+       <div className="flex w-full justify-center  text-[#FF7070] mt-8 font-bold">
+        <p>Selecione mais informações pra a gente encontrar sua Maria.</p>
+      </div>
     </div>
   );
 }

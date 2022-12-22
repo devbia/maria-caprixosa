@@ -99,7 +99,14 @@ export default function Section2() {
             />
           </div>
         </div>
+         
       </div>
+      <div className="flex w-full justify-center font-bold mb-8">
+          <p className="text-[#9900CC]">
+            Clique na opção serviços e veja o que essa categoria faz
+          </p>
+        </div>
+     
     </Container>
   );
 }
