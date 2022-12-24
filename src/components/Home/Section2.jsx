@@ -4,18 +4,25 @@ import { TextTracking } from "../Typography";
 import { CheckBox } from "../Form";
 
 import { motion } from "framer-motion";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { FilterFormContext } from "../../hooks/FilterFormContext";
 import { FilterMobileContext } from "../../hooks/FilterMobileContext";
+import { DataFilterContext } from "../../hooks/DataFilterContext";
 
 import DesktopFilter from "../Filter/DesktopFilter";
+import InvalidFilterMessage from "../InvalidFilterMessage";
 
 export default function Section2() {
   const { choosedOption, setChoosedOption } = useContext(FilterFormContext);
   const { setFilterMobileOpen } = useContext(FilterMobileContext);
 
-  const toggleCheckBox = (option) =>
+  const { setTipoCaprixosa } = useContext(DataFilterContext);
+  const [invalidMessage, setInvalidMessage] = useState(false);
+
+  const toggleCheckBox = (option) => {
     setChoosedOption(choosedOption == option ? null : option);
+    setTipoCaprixosa(choosedOption == option ? null : option);
+  }
 
   return (
     <Container className="bg-gradient-to-b from-[#DEAEBB] to-[#F0ECF1] pt-8 pb-4">
@@ -25,7 +32,7 @@ export default function Section2() {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          <div className="flex justify-center my-10 md:my-14">
+          <div className="flex justify-center my-10 md:mt-8 mb-8">
             <TextTracking>A procura de uma caprixosa?</TextTracking>
           </div>
           <div className="flex flex-col md:flex-row justify-center gap-8 mb-10 md:mb-14">
@@ -56,10 +63,22 @@ export default function Section2() {
           </div>
         </motion.div>
 
+        <InvalidFilterMessage show={invalidMessage}/>
         <div className="flex w-full">
           {/* Dialog button */}
           <button
             onClick={() => {
+
+              if(choosedOption == null){
+                setInvalidMessage(true);
+
+                setTimeout(() => {
+                  setInvalidMessage(false);
+                }, 2500);
+                return;
+              }
+                
+
               document.body.style.overflow = "hidden";
               setFilterMobileOpen(true);
             }}
