@@ -9,23 +9,33 @@ export const DataFilterContext = createContext({});
 
 export default function DataFilterProvider( {children}){
 
-  const [periodo, setPeriodo] = useState("manha");
+  const [periodo, setPeriodoForm] = useState(null);
+  const [numCasa, setNumCasa] = useState(null);
   const [tipoCaprixosa, setTipoCaprixosa] = useState(null); // FAXINEIRA | DIARISTA | DOMÉSTICA
   const [vezesPorSemana, setVezesPorSemana] = useState(1);
-  const [horarioPeriodo, setHorarioPeriodo] = useState("manha"); // MANHÃ, TARDE, A COMBINAR
+  const [horarioPeriodo, setHorarioPeriodo] = useState(null); // MANHÃ, TARDE, A COMBINAR
 
 
-  const [tipoMoradia, setTipoMoradia] = useState("apartamento_padrao"); // apartamento_padrao | casa | outros
+  const [tipoMoradia, setTipoMoradia] = useState(null); // apartamento_padrao | casa | outros
+  const [tipoArea, setTipoArea] = useState(null); // apartamento_padrao | casa | outros
 
   const [qtdQuartos, setQtdQuartos] = useState(1);
   const [qtdBanheiro, setQtdBanheiro] = useState(1);
   const [qtdCozinha, setQtdCozinha] = useState(1);
-  const [temSalaCozinhaIntegrada, setTemSalaCozinhaIntegrada] = useState(false);
+  const [temSalaCozinhaIntegrada, setTemSalaCozinhaIntegrada] = useState(null);
   const [filterCep, setFilterCEP] = useState(false);
 
-  function filtroValido(){
 
-    return  tipoCaprixosa != null;
+
+  function filtroValido(){
+    console.log( (tipoCaprixosa != null) );
+    console.log(  (periodo != null));
+    console.log(((temSalaCozinhaIntegrada != null) || (tipoArea != null)) );
+    console.log(   ((numCasa != null) && (filterCep !=null)));
+    return  (tipoCaprixosa != null) &&
+            (periodo != null) && 
+            ((temSalaCozinhaIntegrada != null) || (tipoArea != null)) && 
+            ((numCasa != null) && (filterCep !=null));
   }
 
   function filterDados(){
@@ -44,7 +54,7 @@ export default function DataFilterProvider( {children}){
   }
   return (
     <DataFilterContext.Provider value={{
-      setPeriodo,
+      setPeriodoForm,
       setVezesPorSemana,
       setHorarioPeriodo,
       setTipoMoradia,
@@ -56,7 +66,14 @@ export default function DataFilterProvider( {children}){
       filtroValido,
       filterDados, 
       setTipoCaprixosa,
-      tipoCaprixosa
+      setTipoArea,
+      setNumCasa,
+      numCasa,
+      tipoCaprixosa,
+      tipoArea,
+      temSalaCozinhaIntegrada,
+      filterCep,
+      setTemSalaCozinhaIntegrada
     }}>
        {children}
     </DataFilterContext.Provider>

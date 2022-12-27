@@ -18,23 +18,30 @@ export default function DesktopFilter() {
   const { filtroValido, tipoCaprixosa} = useContext(DataFilterContext);
 
   const [invalidMessage, setInvalidMessage ] = useState();
+  const [message, setMessage] = useState("");
 
   function toggleClick(){
     if(!filtroValido())
     {
       setInvalidMessage(true);
+      if(!tipoCaprixosa)
+        setMessage(false)
+      else 
+        setMessage("Precisa selecionar a opção anterior para poder avançar.");
 
       setTimeout(() => {
+        
         setInvalidMessage(false);
       }, 2500);
       return;
     }
-   window.location.href = "/profiles";
+
+    window.location.href = "/profiles";
   }
 
   return (
    <div>
-     <InvalidFilterMessage show={invalidMessage}/>
+     <InvalidFilterMessage show={invalidMessage} message={message}/>
      <div className="mx-14 hidden lg:flex rounded py-4 bg-[#f0ecf1]  w-full px-4">
       <div className="flex w-full">
         <div className="flex flex-col justify-center">

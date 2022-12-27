@@ -2,11 +2,12 @@ import TabTemplate from "./TabTemplate";
 import InputMask from "react-input-mask";
 import { TiPlus } from "react-icons/ti";
 import { TiMinus } from "react-icons/ti";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import { CheckBox } from "../Form";
 import SubFilter from "./SubFilter";
 import axios from "axios";
+import { DataFilterContext } from "../../hooks/DataFilterContext";
 
 export const Services = ({ services = [] }) => {
   const items = [
@@ -38,9 +39,12 @@ export const Services = ({ services = [] }) => {
 
 export const Periodo = () => {
   const [periodo, setPeriodo] = useState(1);
-  const [periodoDia, setPeriodoDia] = useState("manha"); // manha || tarde
+  const [periodoDia, setPeriodoDia] = useState(null); // manha || tarde
   const [showTimes, setShowTimes] = useState(false); // manha || tarde
-  const [horaDoDia, setHoraDoDia] = useState("manha"); // manha || tarde
+  const [horaDoDia, setHoraDoDia] = useState(null); // manha || tarde
+
+
+  const { setPeriodoForm } = useContext(DataFilterContext);
 
   const add = () => {
     if (periodo < 3) setPeriodo(periodo + 1);
@@ -65,7 +69,7 @@ export const Periodo = () => {
       <div className="flex justify-between w-full">
         <div
           onClick={selecionarItem}
-          className={`flex flex-col w-full gap-3 w-1/2 rounded-lg p-3 hover:bg-[#d3c5d6] ${
+          className={`flex flex-col w-full gap-3 w-[80%] rounded-lg p-3 hover:bg-[#d3c5d6] ${
             selected && "bg-[#d3c5d6]"
           }`}
         >
@@ -128,7 +132,9 @@ export const Periodo = () => {
                     type="checkbox"
                     className="checkbox checkbox-primary"
                     checked={periodoDia == "tarde"}
-                    onClick={(_) => setPeriodoDia("tarde")}
+                    onClick={(_) => {
+                      setPeriodoDia("tarde")
+                    }}
                   />
                   Tarde
                 </div>
@@ -158,14 +164,22 @@ export const Periodo = () => {
                   "07:00",
                   "13:00",
                   horaDoDia == "manha",
-                  () => setHoraDoDia("manha")
+                  () =>{
+                    let hora = horaDoDia == "manha" ? null : 'manha';
+                     setHoraDoDia(hora);
+                     setPeriodoForm(hora);
+                  }
                 )}
                 {blockTime(
                   "Tarde",
                   "13:00",
                   "18:00",
                   horaDoDia == "tarde",
-                  () => setHoraDoDia("tarde")
+                  () => {
+                      let hora = horaDoDia == "tarde" ? null : 'tarde';
+                     setHoraDoDia(hora);
+                     setPeriodoForm(hora);
+                  }
                 )}
               </div>
               <div
@@ -185,10 +199,13 @@ export const Periodo = () => {
 };
 
 export const LocationCity = ({ periods = [] }) => {
-  const [checked, setChecked] = useState("apartamento_padrao");
-
+  const [checked, setChecked] = useState(null);
+  
+  const { setTipoMoradia } = useContext(DataFilterContext);
+  
   const changeItem = (item) => {
     setChecked(item);
+    setTipoMoradia(item);
   };
 
   return (
@@ -240,6 +257,8 @@ export const Comodos = ({ comodos = [] }) => {
   const [cozinha, setCozinha] = useState(1);
   const [banheiro, setBanheiro] = useState(1);
 
+  const {tipoArea, setTipoArea, temSalaCozinhaIntegrada, setTemSalaCozinhaIntegrada} = useContext(DataFilterContext);
+
   const addQuarto = () => setQuartos(quartos + 1);
   const removeQuarto = () => setQuartos(quartos > 1 ? quartos - 1 : 1);
   const addCozinha = () => setCozinha(cozinha + 1);
@@ -274,11 +293,15 @@ export const Comodos = ({ comodos = [] }) => {
               label="Com área externa"
               checkboxClass="checkbox-primary"
               labelClass="font-bold"
+               checked={tipoArea == 'com_externa' }
+              onClick={()=>setTipoArea(tipoArea == 'com_externa' ? null : 'com_externa')}
             />
             <CheckBox
               label="Outros"
               checkboxClass="checkbox-primary"
               labelClass="font-bold"
+              checked={tipoArea == 'outros' }
+              onClick={()=>setTipoArea(tipoArea == 'outros' ? null : 'outros')}
             />
           </div>
           <div className="flex flex-col w-1/2 gap-8">
@@ -287,11 +310,17 @@ export const Comodos = ({ comodos = [] }) => {
               label="Sala e cozinha (Integrada)"
               checkboxClass="checkbox-primary"
               labelClass="font-bold"
+              checked={temSalaCozinhaIntegrada}
+              onClick={() => {
+                setTemSalaCozinhaIntegrada(temSalaCozinhaIntegrada ? null : true);
+              }}
             />
             <CheckBox
               label="Sem área externa"
               checkboxClass="checkbox-primary"
               labelClass="font-bold"
+              checked={tipoArea == 'sem_externa' }
+              onClick={()=>setTipoArea(tipoArea == 'sem_externa' ? null : 'sem_externa')}
             />
           </div>
         </div>
@@ -301,6 +330,8 @@ export const Comodos = ({ comodos = [] }) => {
 };
 
 export const Location = () => {
+  const { setFilterCEP, filterCep, setNumCasa, numCasa} = useContext(DataFilterContext);
+
   const [showTimes, setShowTimes] = useState(false);
   const [invalidCEP, setInvalidCEP] = useState(false);
   const [estado, setEstado] = useState("");
@@ -329,7 +360,9 @@ export const Location = () => {
         setBairro(data.bairro);
         setCep(data.cep);
         setShowTimes(true);
+        setFilterCEP(data?.cep);
       } else {
+        setFilterCEP(false);
         setInvalidCEP(true);
         setShowTimes(false);
       }
@@ -414,8 +447,9 @@ export const Location = () => {
                   </label>
                   <InputMask
                     id="numero"
-                    onChange={() => null}
+                    onChange={(ev) => setNumCasa(ev.target.value)}
                     maxLength={15}
+                    value={numCasa}
                     type="text"
                     placeholder="Informe o número"
                     className="input input-bordered w-full max-w-xs"

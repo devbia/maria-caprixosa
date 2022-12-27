@@ -73,11 +73,11 @@ export default function Section3() {
             {
               <div
                 ref={carouselRef}
-                className="hidden md:flex   w-full overflow-x-auto gap-8 scroll-smooth "
+                className="hidden md:flex   w-full overflow-x-hidden gap-8 scroll-smooth "
               >
-                <img className="rounded-lg" src="/images/home/carousel/1.png" />
-                <img className="rounded-lg" src="/images/home/carousel/2.png" />
-                <img className="rounded-lg" src="/images/home/carousel/3.png" />
+                <img className="rounded-lg w-64" src="/images/home/carousel/1.png" />
+                <img className="rounded-lg w-64" src="/images/home/carousel/2.png" />
+                <img className="rounded-lg w-64" src="/images/home/carousel/3.png" />
               </div>
             }
             <div className="flex flex-col md:hidden">
