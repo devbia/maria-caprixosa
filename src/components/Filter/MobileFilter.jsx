@@ -91,7 +91,7 @@ export default function MobileFilter() {
           <div className="flex md:justify-center pb-6">
             <button
               onClick={(_) => (!isLast ? goNext() : goToSearch())}
-              className="btn btn-primary w-full md:w-1/2"
+              className="btn btn-primary w-full md:w-1/2 z-50"
             >
               <div className="flex w-full md:justify-center">
                 <div className="flex flex-1 justify-center text-lg">
