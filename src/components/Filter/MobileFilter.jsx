@@ -72,7 +72,7 @@ export default function MobileFilter() {
 
   return (
     <motion.div
-      className={`fixed h-full bottom-5 md:-bottom-10 w-full py-10 z-10   ${
+      className={`fixed h-full bottom-10 pb-3 md:-bottom-10 w-full py-0 z-10   ${
         ready ? "lg:hidden" : "hidden"
       }`}
       animate={filterMobileOpen ? "open" : "close"}

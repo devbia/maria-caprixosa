@@ -373,7 +373,7 @@ export const Location = ({ beforeItem, id = "location" }) => {
         </div>
       </div>
          <SubFilterMobile isOpen={showTimes} close={closeSubMenu}>
-          <div className="grid grid-cols-1 md:grid-cols-2 md:px-11 w-full overflow-y-scroll h-full  md:max-h-auto">
+          <div className="grid grid-cols-1 pb-16 md:pb-0 md:grid-cols-2 md:px-11 w-full overflow-scroll  h-auto  md:max-h-auto">
             <div className="flex flex-col w-full gap-5">
               <div className="flex flex-col w-full">
                 <label htmlFor="estado" className="font-bold">
@@ -400,7 +400,7 @@ export const Location = ({ beforeItem, id = "location" }) => {
                 <span id="bairro">{bairro}</span>
               </div>
             </div>
-            <div className="flex flex-col w-full gap-5">
+            <div className="flex flex-col w-full gap-5 pr-5">
               <div className="flex flex-col w-full">
                 <label htmlFor="cep" className="font-bold">
                   CEP
