@@ -109,8 +109,8 @@ export default function ContactForm({ isMobile = false, bottomHeight = 0 }) {
         </label>
         <input
           type="text"
-          placeholder="Digite seu nome aqui..."
-          className={`input input-bordered w-full md:max-w-xs ${nomeInvalido && 'border-red-500'}`}
+        
+          className={`input input-bordered bg-transparent focus:outline-none border-black  w-full md:max-w-xs ${nomeInvalido && 'border-red-500'}`}
           onInput={(ev) => setName(ev.target.value)}
           maxLength={150}
           value={name}
@@ -126,8 +126,7 @@ export default function ContactForm({ isMobile = false, bottomHeight = 0 }) {
           value={telefone}
           onInput={(ev) => setTelefone(ev.target.value)}
           type="text"
-          placeholder="EX: (xx) xxxx-xxxxx"
-          className={`input input-bordered w-full md:max-w-xs ${telefoneInvalido && 'border-red-500'}`}
+          className={`input input-bordered bg-transparent focus:outline-none border-black  w-full md:max-w-xs ${telefoneInvalido && 'border-red-500'}`}
         />
 
       </div>
@@ -138,9 +137,8 @@ export default function ContactForm({ isMobile = false, bottomHeight = 0 }) {
         <input
           value={email}
           type="email"
-          placeholder="Ex: seuemail@email.com"
           onInput={(ev) => setEmail(ev.target.value)}
-          className={`input input-bordered w-full md:max-w-xs ${emailInvalido && 'border-red-500'}`}
+          className={`input input-bordered bg-transparent focus:outline-none border-black  w-full md:max-w-xs ${emailInvalido && 'border-red-500'}`}
         />
       </div>
       <div className="mb-4">
