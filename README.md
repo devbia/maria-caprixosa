@@ -3,15 +3,8 @@
 Desenvolvimento do front-end das telas representadas no figma. 
 Todas as telas a serem desenvolvidas estão dentro da pasta screens. 
 
-O projeto está previsto para entrega dia `20/12/2022`.
+O projeto está previsto para entrega dia `27/12/2022`.
 
-### Problema com alguma tela? 
-
-Caso encontre algum problema com a tela crie um [issued](https://github.com/allandiegoasilva/maria-caprixosa/issues/new), desta formam conseguimos manter os bugs e o desenvolvimento do projeto alinhado para não se perder no ciclo de desenvolvimento. 
-
-### Acesso ao projeto on-line. 
-
-[Clique para acessar o projeto on-line](https://maria-caprixosa.vercel.app/)
 
 ### Tecnologias 
 
