@@ -26,7 +26,7 @@ export default function Section2() {
 
   return (
     <Container className="bg-gradient-to-b from-[#DEAEBB] to-[#F0ECF1] pt-8 pb-4">
-      <div id="filterBTN" className="flex flex-col">
+      <div  className="flex flex-col">
         <motion.div
           initial="hidden"
           whileInView="visible"

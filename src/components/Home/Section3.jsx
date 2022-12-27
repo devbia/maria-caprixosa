@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import Slider from "react-slick";
+import { TextTracking } from "../Typography";
 
 export default function Section3() {
   const carouselRef = useRef(null);
@@ -32,10 +33,10 @@ export default function Section3() {
   return (
     <div className="w-full px-2 md:pl-24 pb-8 bg-accent">
       <div className="flex flex-col md:flex-row ml-0 md:ml-14 gap-14">
-        <div className="flex md:flex-col gap-6 justify-center md:justify-start">
+        <div className="hidden md:flex md:flex-col gap-6 justify-center md:justify-start">
           <img
             src="/images/global/avatar-logo.png"
-            className="w-[100px] md:w-auto"
+            className="hidden md:w-auto md:block"
             style={{ maxWidth: "155px" }}
           />
           <p className="font-lg font-bold text-center md:text-left">
@@ -43,6 +44,20 @@ export default function Section3() {
             aconchegante com <br className="hidden md:block" />
             toque de Maria caprixosa
           </p>
+        </div>
+        <div className="flex md:hidden gap-3 justify-center md:justify-start px-4">
+          <img
+            src="/images/global/avatar.png"
+            className="md:w-auto md:hidden"
+            style={{ maxWidth: "155px" }}
+          />
+          <div className="flex flex-col justify-center">
+             <TextTracking className={'text-center'}>
+            Um lar limpo e <br className="hidden md:block" />
+            aconchegante com <br className="hidden md:block" />
+            toque de Maria caprixosa
+          </TextTracking>
+          </div>
         </div>
         <div className="flex flex-1 gap-6">
           <div className=" hidden md:flex  flex-col h-full justify-center">

@@ -28,6 +28,7 @@ export default function ContactForm({ isMobile = false, bottomHeight = 0 }) {
     open: { height: "100%" },
     closed: {
       height: isMobile ? 0 : "100%",
+      bottom: -100
     },
   };
 
@@ -82,7 +83,7 @@ export default function ContactForm({ isMobile = false, bottomHeight = 0 }) {
               isMobile &&
               `
             h-full
-            -bottom-10
+            bottom-0
             pb-20`
             }
 

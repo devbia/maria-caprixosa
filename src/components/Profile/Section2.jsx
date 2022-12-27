@@ -37,7 +37,8 @@ export default function Section2() {
   }
 
   return (
-    <div className="flex flex-col w-full bg-[#E4DFE0]">
+    <div className="flex">
+      <div className="flex flex-col w-full bg-[#E4DFE0]">
         <div className="flex flex-col gap-8 md:gap-0  md:flex-row w-full py-8 lg:px-28 lg:py-20  justify-around">
           {info.map((data, index) => <div key={index} className="flex flex-col gap-3">
             <div className="flex justify-center">
@@ -51,14 +52,14 @@ export default function Section2() {
         
         <div className="flex flex-col w-full gap-8 md:gap-0 lg:px-28 py-20 justify-around">
           <div className="flex w-full justify-center">
-            <TextTracking>Veja outros perfis</TextTracking>
+            <TextTracking className={'text-xl'}>Veja outros perfis</TextTracking>
           </div>
          
           <div className="flex w-full justify-center py-5 lg:py-0 lg:justify-end">
-            <div className="form-control">
-              <div className="input-group  input-group-sm">
-                <input type="text" placeholder="Buscar" className="input input-bordered outline-none shadow-none input-sm w-full max-w-x w-56 border-r-0" />
-                <button className="btn btn-info btn-sm py-0 border-gray-300 border-l-0">
+            <div className="form-control lg:form-control-sm">
+              <div className="input-group">
+                <input type="text" placeholder="Buscar" className="input input-bordered outline-none shadow-none uppercase text-center w-full max-w-x w-56 border-r-0" />
+                <button className="btn btn-info py-0 border-gray-300 border-l-0">
                   <FaSearch className="text-gray-500 self-center my-0"/>
                 </button>
               </div>
@@ -76,5 +77,6 @@ export default function Section2() {
           </div>
         </div>
       </div>
+    </div>
   ); 
 }

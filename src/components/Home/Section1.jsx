@@ -14,7 +14,7 @@ export default function Section1() {
         animate={{ opacity: 1 }}
         initial={{ opacity: 0 }}
         transition={{ ease: "easeOut", duration: 2 }}
-        className="w-full"
+        className="w-full py-24 md:py-0"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 md:bg-[url('/images/home/bg.png')] bg-no-repeat bg-contain bg-center">
           <div className="flex justify-center md:justify-end">
@@ -67,7 +67,9 @@ export default function Section1() {
             </div>
           </div>
         </div>
+        <div id="filterBTN"></div>
       </motion.div>
+       
     </Container>
   );
 }

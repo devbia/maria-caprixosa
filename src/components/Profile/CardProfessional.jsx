@@ -36,7 +36,7 @@ export default function CardProfessional({
     return stars;
   };
   return (
-    <div className="flex w-full justify-center mx-4">
+    <div className="flex w-full justify-center md:mx-4">
       <div className="card w-72 bg-transparent">
         <figure>
           <img

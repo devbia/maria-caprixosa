@@ -20,8 +20,9 @@ export default function Layout({ children }) {
   }, []);
 
   return (
-    <>
-      <Navbar />
+    <div className="2xl:flex  2xl:justify-center 2xl:w-full">
+        <div className="2xl:max-w-screen-xl">
+              <Navbar />
       <div className="w-full">{children}</div>
       <BottomMenu />
       <MobileFilter />
@@ -37,6 +38,7 @@ export default function Layout({ children }) {
         <Alert/>
       </div>
       <Footer />
-    </>
+        </div>
+    </div>
   );
 }
